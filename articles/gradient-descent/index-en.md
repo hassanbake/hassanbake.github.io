@@ -1,3 +1,10 @@
+---
+title: Gradient Descent Basics
+author: Roozbeh Maheronnaghsh
+role: Author
+date: 2025-12-28
+---
+
 # Understanding Gradient Descent
 
 Gradient descent is one of the most fundamental optimization algorithms

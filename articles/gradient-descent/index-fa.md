@@ -1,20 +1,27 @@
-# Understanding Gradient Descent
+---
+title: Gradient Descent Basics
+author: روزبه ماهرالنقش
+role: نویسنده
+date: 1404-10-16
+image: /assets/images/authors/roozbeh-maheronnaghsh-01.png
+---
 
-Gradient descent is one of the most fundamental optimization algorithms
-in machine learning.
+# مبانی گرادیان نزولی
 
-## Why it matters
+گرادیان نزولی یکی از معروف‌ترین الگوریتم‌های بهینه‌سازی در یادگیری ماشین است. این الگوریتم به ما کمک می‌کند تا با حرکت گام‌به‌گام به سمت کمینه یک تابع حرکت کنیم.
 
-It allows us to train models efficiently by minimizing loss functions.
+## مثال در پایتون
 
-### مثال Python
+````python
+def gradient_descent(x_start, learning_rate, iterations):
+    x = x_start
+    for _ in range(iterations):
+        gradient = 2 * x
+        x = x - learning_rate * gradient
+    return x
 
-```python
-import torch
-
-x = torch.tensor([1.0, 2.0])
-print(x.mean())
-```
+minimum = gradient_descent(10, 0.1, 100)
+print(minimum)
 
 ### مثال JavaScript
 
@@ -22,7 +29,7 @@ print(x.mean())
 function greet(name) {
   return `Hello ${name}`;
 }
-```
+````
 
 ### مثال Solidity (خیلی مهم برای تو 😉)
 
