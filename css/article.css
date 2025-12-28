@@ -1,0 +1,108 @@
+.article-page {
+  padding: 3rem 1rem;
+}
+
+.article-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4fr 1fr; /* 80 / 20 */
+  gap: 3rem;
+}
+
+html[dir="rtl"] .article-container {
+  grid-template-columns: 4fr 1fr;
+}
+
+.article-meta {
+  position: relative;
+}
+
+.author-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  position: sticky;
+  top: 2rem;
+  background: #fff;
+}
+
+.author-card img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.author-card h3 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1rem;
+}
+
+.author-role {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.author-card time {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+/* RTL code blocks fix */
+html[dir="rtl"] .prose pre {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .article-container {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-meta {
+        order: 2;
+        margin-top: 2rem;
+    }
+
+    .article-content {
+        order: 1;
+    }
+
+    .author-card {
+        position: static;
+        max-width: 360px;
+        margin: 2rem auto 0;
+    }
+
+    .prose {
+        max-width: 100%;
+    }
+}
+
+/* --- Fix mobile horizontal scroll --- */
+
+/* Override site-main flex centering for articles */
+.article-page {
+  display: block;
+}
+
+/* Allow grid items to shrink properly */
+.article-container,
+.article-content,
+.prose {
+  min-width: 0;
+}
+
+/* === Article layout isolation === */
+
+/* Disable flex centering inherited from site-main */
+.article-page.site-main {
+  display: block;
+}
