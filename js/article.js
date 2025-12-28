@@ -4,7 +4,8 @@ const slug = params.get("slug");
 let lang = params.get("lang") || "en";
 
 const root = `/articles/${slug}/`;
-const toggleBtn = document.getElementById("articleLangToggle");
+
+let toggleBtn = null;
 
 async function exists(path) {
   const res = await fetch(path, { method: "HEAD" });
@@ -12,6 +13,8 @@ async function exists(path) {
 }
 
 async function loadArticle() {
+  toggleBtn = document.getElementById("articleLangToggle");
+
   if (!slug) {
     showError("No article specified.");
     return;
@@ -72,5 +75,3 @@ function setupToggle(hasEN, hasFA) {
 function showError(msg) {
   document.getElementById("articleContent").innerHTML = `<p>${msg}</p>`;
 }
-
-loadArticle();
