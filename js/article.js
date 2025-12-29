@@ -6,18 +6,9 @@ const root = `/articles/${slug}/`;
 let toggleBtn = null;
 
 // بررسی وجود فایل
-// async function exists(path) {
-//   const res = await fetch(path, { method: "HEAD" });
-//   return res.ok;
-// }
-
 async function exists(path) {
-  try {
-    const res = await fetch(path, { cache: "no-store" });
-    return res.ok;
-  } catch {
-    return false;
-  }
+  const res = await fetch(path, { method: "HEAD" });
+  return res.ok;
 }
 
 // خواندن front-matter و markdown content
