@@ -3,7 +3,6 @@ title: Gradient Descent Basics
 author: روزبه ماهرالنقش
 role: نویسنده
 date: 1404-10-16
-image: /assets/images/authors/roozbeh-maheronnaghsh-01.png
 ---
 
 # مبانی گرادیان نزولی
