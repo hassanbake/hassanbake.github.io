@@ -240,7 +240,7 @@ html[dir="rtl"] .header-nav {
 }
 
 .prose pre {
-  background: #f6f8fa;
+  background: #292929;
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -261,8 +261,13 @@ html[dir="rtl"] .header-nav {
 }
 
 .prose code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace !important;
 }
+
+html[lang="fa"] .prose code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace !important;
+}
+
 
 .prose pre code {
   background: none;

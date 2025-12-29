@@ -5,6 +5,9 @@ let lang = params.get("lang") || "en";
 const root = `/articles/${slug}/`;
 let toggleBtn = null;
 
+hljs.registerLanguage("solidity", hljs.getLanguage("solidity"));
+hljs.highlightAll();
+
 // بررسی وجود فایل
 async function exists(path) {
   const res = await fetch(path, { method: "HEAD" });
