@@ -1,0 +1,49 @@
+---
+import { LOCALE_META, STRINGS, localePath, type Locale } from "../i18n";
+import Wordmark from "./Wordmark.astro";
+
+export interface Props {
+  locale: Locale;
+  /** "home" shows Notes / Hello, "article" shows a back link. */
+  variant: "home" | "article";
+  /** The same page in the other language, when it exists. */
+  switchTo?: { locale: Locale; href: string };
+}
+
+const { locale, variant, switchTo } = Astro.props;
+const t = STRINGS[locale];
+const home = localePath(locale);
+---
+
+<header class="nav rise-in">
+  <a class="nav-brand" href={home} aria-label={`${t.homeLabel}: hassanbake`}>
+    <Wordmark />
+  </a>
+  <nav class="nav-links" aria-label={t.primaryNav}>
+    {
+      variant === "home" ? (
+        <>
+          <a href="#notes">{t.navNotes}</a>
+          <a href="#hello">{t.navHello}</a>
+        </>
+      ) : (
+        <a href={`${home}#notes`}>
+          <span class="arrow-back" aria-hidden="true">{locale === "fa" ? "→" : "←"}</span> {t.backToNotes}
+        </a>
+      )
+    }
+    {
+      switchTo && (
+        <a
+          class="pill"
+          href={switchTo.href}
+          hreflang={switchTo.locale}
+          lang={switchTo.locale}
+          dir={switchTo.locale === "en" ? "ltr" : "rtl"}
+        >
+          {LOCALE_META[switchTo.locale].label}
+        </a>
+      )
+    }
+  </nav>
+</header>

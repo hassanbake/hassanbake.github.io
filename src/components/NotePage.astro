@@ -1,0 +1,130 @@
+---
+import { render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../config";
+import { STRINGS, formatDate, formatNumber, notePath, type Locale } from "../i18n";
+import type { Note } from "../posts";
+
+export interface Props {
+  note: Note;
+  /** The same note in the other language, if it exists. */
+  translation?: Note;
+  /** Other notes in the same language for "Keep reading". */
+  more?: Note[];
+}
+
+const { note, translation, more = [] } = Astro.props;
+const { locale, slug, data, author } = note;
+const t = STRINGS[locale];
+const { Content, headings } = await render(note);
+const toc = headings.filter((h) => h.depth === 2);
+const initial = [...author][0];
+
+const alternates: Partial<Record<Locale, string>> = { [locale]: notePath(locale, slug) };
+if (translation) alternates[translation.locale] = notePath(translation.locale, slug);
+---
+
+<Base
+  locale={locale}
+  title={data.title}
+  description={data.description}
+  image={data.image}
+  alternates={alternates}
+  article={{ published: data.date, modified: data.updated, tags: data.tags, author }}
+>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="a-head dark">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="wrap a-head-in">
+      <SiteNav
+        locale={locale}
+        variant="article"
+        switchTo={translation && { locale: translation.locale, href: notePath(translation.locale, slug) }}
+      />
+      <div class="a-head-body">
+        <p class="a-meta rise-in" style="--d:0ms">
+          <span class="badge">{note.category}</span>
+          <span class="meta-text">{formatNumber(note.readingMinutes, locale)} {t.minRead}</span>
+          <time class="meta-text" datetime={data.date.toISOString()}>{formatDate(data.date, locale)}</time>
+        </p>
+        <h1 class="a-title rise-in" style="--d:120ms">{data.title}</h1>
+        <p class="a-stand rise-in" style="--d:240ms">{data.description}</p>
+        <p class="byline rise-in" style="--d:360ms">
+          <span class="avatar" aria-hidden="true">{initial}</span>
+          <span>{author}</span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="a-body">
+    <div class="wrap a-grid">
+      {
+        toc.length > 1 && (
+          <nav class="toc" aria-label={t.onThisPage}>
+            <p class="toc-title">{t.onThisPage}</p>
+            <ol>
+              {toc.map((h) => (
+                <li><a href={`#${h.slug}`}>{h.text}</a></li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+      <main class="prose" id="content">
+        <Content />
+      </main>
+    </div>
+  </div>
+
+  {
+    more.length > 0 && (
+      <section class="more" aria-labelledby="more-title">
+        <div class="wrap">
+          <h2 id="more-title">{t.keepReading}</h2>
+          <ul class="more-grid">
+            {more.map((m) => (
+              <li class="rv">
+                <a class="card" href={notePath(locale, m.slug)}>
+                  <span class="chip-static">{m.category}</span>
+                  <span class="card-title">{m.data.title}</span>
+                  <span class="card-meta">
+                    {formatDate(m.data.date, locale)} · {formatNumber(m.readingMinutes, locale)} {t.minRead}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <Footer locale={locale} back />
+
+  <script>
+    // Highlight the table-of-contents entry for the section being read.
+    const links = [...document.querySelectorAll<HTMLAnchorElement>(".toc a")];
+    const targets = links
+      .map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+      .filter((el): el is HTMLElement => !!el);
+    if (targets.length) {
+      const setActive = () => {
+        let current = targets[0];
+        for (const el of targets) if (el.getBoundingClientRect().top <= 140) current = el;
+        const atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+        if (atEnd) current = targets[targets.length - 1];
+        links.forEach((a) =>
+          a.classList.toggle("active", decodeURIComponent(a.hash.slice(1)) === current.id),
+        );
+      };
+      addEventListener("scroll", setActive, { passive: true });
+      setActive();
+    }
+  </script>
+</Base>

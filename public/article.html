@@ -9,7 +9,7 @@
     var p = new URLSearchParams(location.search);
     var slug = p.get("slug");
     var target = slug
-      ? (p.get("lang") === "fa" ? "/fa" : "") + "/posts/" + encodeURIComponent(slug) + "/"
+      ? (p.get("lang") === "fa" ? "/fa" : "") + "/notes/" + encodeURIComponent(slug) + "/"
       : "/";
     location.replace(target);
   </script>

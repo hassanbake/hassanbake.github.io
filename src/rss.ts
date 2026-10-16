@@ -1,22 +1,22 @@
 import rss from "@astrojs/rss";
 import { SITE } from "./config";
-import { STRINGS, localePath, postPath, type Locale } from "./i18n";
-import { getPosts } from "./posts";
+import { STRINGS, localePath, notePath, type Locale } from "./i18n";
+import { getNotes } from "./posts";
 
 export async function feed(locale: Locale, site: URL) {
-  const posts = await getPosts(locale);
+  const notes = await getNotes(locale);
   return rss({
     title: SITE.name,
-    description: STRINGS[locale].description,
+    description: STRINGS[locale].tagline,
     site: new URL(localePath(locale), site),
     trailingSlash: true,
-    items: posts.map((post) => ({
-      title: post.data.title,
-      description: post.data.description,
-      pubDate: post.data.date,
-      link: postPath(locale, post.slug),
-      categories: post.data.tags,
-      author: SITE.author[locale].name,
+    items: notes.map((note) => ({
+      title: note.data.title,
+      description: note.data.description,
+      pubDate: note.data.date,
+      link: notePath(locale, note.slug),
+      categories: [note.category, ...note.data.tags],
+      author: note.author,
     })),
     customData: `<language>${locale}</language>`,
   });

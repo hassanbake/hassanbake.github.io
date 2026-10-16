@@ -11,33 +11,61 @@ export const LOCALE_META: Record<
   fa: {
     dir: "rtl",
     ogLocale: "fa_IR",
-    dateLocale: "fa-IR-u-ca-persian",
+    // Gregorian calendar with Persian digits and month names. The calendar
+    // (Jalali vs Gregorian) is still undecided; this is the placeholder.
+    dateLocale: "fa-IR-u-ca-gregory",
     label: "فارسی",
   },
 };
 
 export const STRINGS = {
   en: {
-    tagline: "from raw ideas to baked understanding",
-    description:
-      "Technical essays and learning notes on Software Architecture, Machine Learning, Blockchain and building clear mental models.",
-    posts: "Posts",
-    noPosts: "No posts yet. The first one is in the oven.",
+    tagline: "Notes on architecture and AI-assisted code.",
+    kicker: "Architecture · AI-assisted code",
+    navNotes: "Notes",
+    navHello: "Hello",
+    latestNotes: "Latest notes",
+    filterAll: "All",
+    allNotes: "All notes",
+    newBadge: "New",
+    noNotes: "No notes yet. The first one is in the oven.",
+    minRead: "min read",
+    sayHello: "Say hello",
+    backToNotes: "All notes",
+    backToTop: "Back to all notes",
+    onThisPage: "On this page",
+    keepReading: "Keep reading",
+    defaultCategory: "Notes",
     rights: "All rights reserved.",
-    rss: "RSS",
     notFound: "Page not found",
     backHome: "Back to home",
+    homeLabel: "Home",
+    primaryNav: "Main",
+    topics: "Topics",
   },
   fa: {
-    tagline: "از ایده‌های خام تا فهم پخته",
-    description:
-      "جستارهای فنی و یادداشت‌های یادگیری درباره معماری نرم‌افزار، یادگیری ماشین، بلاک‌چین و ساختن مدل‌های ذهنی روشن.",
-    posts: "نوشته‌ها",
-    noPosts: "هنوز نوشته‌ای منتشر نشده. اولی در فر است.",
+    tagline: "یادداشت‌هایی درباره‌ی معماری نرم‌افزار و کدنویسی با هوش مصنوعی.",
+    kicker: "معماری · کدنویسی با هوش مصنوعی",
+    navNotes: "یادداشت‌ها",
+    navHello: "سلام",
+    latestNotes: "تازه‌ترین یادداشت‌ها",
+    filterAll: "همه",
+    allNotes: "همه یادداشت‌ها",
+    newBadge: "تازه",
+    noNotes: "هنوز یادداشتی منتشر نشده. اولی در فر است.",
+    minRead: "دقیقه مطالعه",
+    sayHello: "سلام بگویید",
+    backToNotes: "همه یادداشت‌ها",
+    backToTop: "بازگشت به همه یادداشت‌ها",
+    onThisPage: "در این صفحه",
+    keepReading: "ادامه مطالعه",
+    defaultCategory: "یادداشت",
     rights: "همه حقوق محفوظ است.",
-    rss: "RSS",
     notFound: "صفحه پیدا نشد",
     backHome: "بازگشت به خانه",
+    homeLabel: "خانه",
+    primaryNav: "اصلی",
+    topics: "موضوع‌ها",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -47,8 +75,8 @@ export function localePath(locale: Locale, path = "/"): string {
   return locale === DEFAULT_LOCALE ? clean : `/${locale}${clean}`;
 }
 
-export function postPath(locale: Locale, slug: string): string {
-  return localePath(locale, `/posts/${slug}/`);
+export function notePath(locale: Locale, slug: string): string {
+  return localePath(locale, `/notes/${slug}/`);
 }
 
 export function formatDate(date: Date, locale: Locale): string {
@@ -56,4 +84,9 @@ export function formatDate(date: Date, locale: Locale): string {
     dateStyle: "long",
     timeZone: "UTC",
   }).format(date);
+}
+
+/** Numbers in the right digits for the locale (Persian digits on /fa/). */
+export function formatNumber(n: number, locale: Locale): string {
+  return new Intl.NumberFormat(locale === "fa" ? "fa-IR" : "en-US").format(n);
 }

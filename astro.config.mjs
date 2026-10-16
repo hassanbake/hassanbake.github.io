@@ -18,6 +18,18 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    shikiConfig: { theme: "github-dark" },
+    shikiConfig: {
+      theme: "github-dark",
+      transformers: [
+        {
+          // ```js title="app.js" renders the file name in a caption bar.
+          pre(node) {
+            const raw = this.options.meta?.__raw ?? "";
+            const match = /title="([^"]+)"/.exec(raw);
+            if (match) node.properties["data-title"] = match[1];
+          },
+        },
+      ],
+    },
   },
 });
