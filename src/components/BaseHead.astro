@@ -2,6 +2,9 @@
 import { SITE } from "../config";
 import { LOCALE_META, localePath, type Locale } from "../i18n";
 import { ogPath } from "../og/paths";
+import bricolage from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import sourceSans from "@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2?url";
+import vazirmatn from "@fontsource-variable/vazirmatn/files/vazirmatn-arabic-wght-normal.woff2?url";
 
 export interface Props {
   locale: Locale;
@@ -59,6 +62,11 @@ const jsonLd = article
 {article && <meta name="author" content={article.author} />}
 {article?.authorUrl && <link rel="author" href={article.authorUrl} />}
 <link rel="canonical" href={canonical} />
+{
+  (locale === "fa" ? [vazirmatn] : [bricolage, sourceSans]).map((href) => (
+    <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />
+  ))
+}
 {noindex && <meta name="robots" content="noindex" />}
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

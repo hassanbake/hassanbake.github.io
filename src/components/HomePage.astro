@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
 import NoteRows from "../components/NoteRows.astro";
 import LiveSphere from "../components/LiveSphere.astro";
-import girih from "../assets/hero-pattern-D.svg?raw";
+import { GIRIH_LINES } from "../girih";
 import { ART_CREDIT, FEATURED_PIECE, MADE_WITH, artPath } from "../art";
 import {
   STRINGS,
@@ -42,7 +42,10 @@ const helloHref = email ? `mailto:${email}` : github;
   <section class="hero dark">
     <div class="blob b1" aria-hidden="true"></div>
     <div class="blob b2" aria-hidden="true"></div>
-    <div class="hero-girih-layer" aria-hidden="true"><Fragment set:html={girih} /></div>
+    <div class="hero-girih-layer" aria-hidden="true">
+      <canvas class="hero-girih" data-girih></canvas>
+      <script type="application/json" id="girih-lines" set:html={JSON.stringify(GIRIH_LINES)} />
+    </div>
     <div class="wrap hero-in">
       <SiteNav locale={locale} variant="home" switchTo={{ locale: other, href: localePath(other) }} />
       <main class="hero-main">
@@ -146,6 +149,19 @@ const helloHref = email ? `mailto:${email}` : github;
   </section>
 
   <Footer locale={locale} switchTo={{ locale: other, href: localePath(other) }} />
+
+  <script>
+    import { drawGirih } from "../scripts/girih-canvas.js";
+
+    // The girih behind the wordmark draws itself once; reduced motion gets the finished pattern.
+    const girih = document.querySelector<HTMLCanvasElement>("[data-girih]");
+    const girihData = document.getElementById("girih-lines");
+    if (girih && girihData) {
+      const lines: number[] = JSON.parse(girihData.textContent || "[]");
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      drawGirih(girih, lines, { animate: !still });
+    }
+  </script>
 
   <script>
     // Category chips filter the featured note and the rows client-side.
