@@ -384,10 +384,25 @@ html[lang="fa"] .kicker {
 
 .tagline {
   margin: clamp(20px, 3vw, 36px) 0 0;
+  max-width: 24ch;
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.1rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--tx);
+}
+html[lang="fa"] .tagline {
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.descriptor {
+  margin: 8px 0 0;
   max-width: 46ch;
-  font-size: clamp(1.1rem, 1rem + 0.7vw, 1.4rem);
+  font-size: clamp(1rem, 0.95rem + 0.4vw, 1.2rem);
   line-height: 1.55;
-  color: var(--tx2);
+  color: var(--tx3);
 }
 
 /* ---------- Marquee ---------- */
@@ -613,6 +628,38 @@ html[lang="fa"] .feat-title {
 html[lang="fa"] .row-num {
   font-family: var(--f-body);
 }
+.row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.row-teaser {
+  max-width: 62ch;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tx2);
+}
+html[lang="fa"] .row-teaser {
+  line-height: 1.9;
+}
+.row-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: end;
+}
+.row-read {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  color: var(--tx4);
+  white-space: nowrap;
+}
+html[lang="fa"] .row-read {
+  font-family: var(--f-body);
+  font-size: 0.85rem;
+}
 .row-title {
   font-family: var(--f-display);
   font-weight: 600;
@@ -662,8 +709,12 @@ html[lang="fa"] .row-date {
     grid-column: 2 / 3;
     justify-self: start;
   }
-  .row-date {
+  .row-meta {
     grid-column: 2 / 3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    align-items: baseline;
   }
   .row-arrow {
     grid-column: 3 / 4;
@@ -763,6 +814,21 @@ html[lang="fa"] .row-date {
 .foot a:hover {
   color: var(--ac2);
 }
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 24px;
+}
+.foot .foot-lang {
+  padding-inline: 16px;
+  border: 1px solid var(--line3);
+  border-radius: 999px;
+  color: var(--tx);
+}
+.foot .foot-lang:hover {
+  border-color: var(--ac);
+}
 
 /* ---------- Article ---------- */
 .progress {
@@ -826,6 +892,40 @@ html[lang="fa"] .a-title {
   margin: clamp(24px, 3vw, 40px) 0 0;
   color: var(--tx);
   font-weight: 500;
+}
+.byline-name {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--line3);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.25s, color 0.25s;
+}
+.byline-name:hover {
+  color: var(--ac2);
+  text-decoration-color: currentColor;
+}
+.a-lang {
+  margin: clamp(16px, 2vw, 24px) 0 0;
+}
+.a-lang a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--tx2);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--line3);
+  transition: color 0.25s, border-color 0.25s;
+}
+.a-lang a:hover {
+  color: var(--ac2);
+  border-color: var(--ac2);
+}
+.avatar-lg {
+  width: 64px;
+  height: 64px;
+  font-size: 1.6rem;
 }
 .avatar {
   display: grid;

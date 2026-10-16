@@ -1,0 +1,8 @@
+---
+import AuthorPage from "../../../components/AuthorPage.astro";
+import { authorStaticPaths } from "../../../noteRoutes";
+
+export const getStaticPaths = () => authorStaticPaths("fa");
+---
+
+<AuthorPage {...Astro.props} />

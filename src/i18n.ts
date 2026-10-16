@@ -11,17 +11,18 @@ export const LOCALE_META: Record<
   fa: {
     dir: "rtl",
     ogLocale: "fa_IR",
-    // Gregorian calendar with Persian digits and month names. The calendar
-    // (Jalali vs Gregorian) is still undecided; this is the placeholder.
-    dateLocale: "fa-IR-u-ca-gregory",
+    // Persian site: Jalali (Shamsi) calendar with Persian digits and month
+    // names. The English site stays Gregorian.
+    dateLocale: "fa-IR-u-ca-persian",
     label: "فارسی",
   },
 };
 
 export const STRINGS = {
   en: {
-    tagline: "Notes on architecture and AI-assisted code.",
-    kicker: "Architecture · AI-assisted code",
+    tagline: "Notes and knots.",
+    descriptor: "Software architecture, AI-assisted code, and geometry made with code.",
+    kicker: "Architecture · AI-assisted code · Geometric art",
     navNotes: "Notes",
     navHello: "Hello",
     latestNotes: "Latest notes",
@@ -42,10 +43,14 @@ export const STRINGS = {
     homeLabel: "Home",
     primaryNav: "Main",
     topics: "Topics",
+    notesBy: "Notes by",
+    readInOther: "Read this note in Persian",
+    otherLanguage: "Language",
   },
   fa: {
-    tagline: "یادداشت‌هایی درباره‌ی معماری نرم‌افزار و کدنویسی با هوش مصنوعی.",
-    kicker: "معماری · کدنویسی با هوش مصنوعی",
+    tagline: "یادداشت‌ها و گره‌ها.",
+    descriptor: "معماری نرم‌افزار، کدنویسی با هوش مصنوعی، و هندسه‌ای که با کد ساخته می‌شود.",
+    kicker: "معماری · کدنویسی با هوش مصنوعی · گره‌کشی",
     navNotes: "یادداشت‌ها",
     navHello: "سلام",
     latestNotes: "تازه‌ترین یادداشت‌ها",
@@ -66,6 +71,9 @@ export const STRINGS = {
     homeLabel: "خانه",
     primaryNav: "اصلی",
     topics: "موضوع‌ها",
+    notesBy: "یادداشت‌های",
+    readInOther: "این یادداشت را به انگلیسی بخوانید",
+    otherLanguage: "زبان",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -73,6 +81,15 @@ export const STRINGS = {
 export function localePath(locale: Locale, path = "/"): string {
   const clean = path.startsWith("/") ? path : `/${path}`;
   return locale === DEFAULT_LOCALE ? clean : `/${locale}${clean}`;
+}
+
+/** Tagline plus descriptor: the meta description of the home page and feeds. */
+export function siteDescription(locale: Locale): string {
+  return `${STRINGS[locale].tagline} ${STRINGS[locale].descriptor}`;
+}
+
+export function authorPath(locale: Locale, slug: string): string {
+  return localePath(locale, `/authors/${slug}/`);
 }
 
 export function notePath(locale: Locale, slug: string): string {
@@ -84,6 +101,16 @@ export function formatDate(date: Date, locale: Locale): string {
     dateStyle: "long",
     timeZone: "UTC",
   }).format(date);
+}
+
+/** Year for the footer: Jalali on the Persian site, Gregorian on the English one. */
+export function formatYear(date: Date, locale: Locale): string {
+  return new Intl.DateTimeFormat(LOCALE_META[locale].dateLocale, {
+    year: "numeric",
+    timeZone: "UTC",
+  })
+    .format(date)
+    .replace(/[,٬]/g, "");
 }
 
 /** Numbers in the right digits for the locale (Persian digits on /fa/). */

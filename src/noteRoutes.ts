@@ -1,3 +1,4 @@
+import { SITE } from "./config";
 import type { Locale } from "./i18n";
 import { getNotes } from "./posts";
 
@@ -13,4 +14,19 @@ export async function noteStaticPaths(locale: Locale) {
       more: inLocale.filter((n) => n.slug !== note.slug).slice(0, 3),
     },
   }));
+}
+
+/** getStaticPaths for /authors/<slug>/ and /fa/authors/<slug>/. */
+export async function authorStaticPaths(locale: Locale) {
+  const notes = await getNotes(locale);
+  return [
+    {
+      params: { slug: SITE.authorSlug },
+      props: {
+        locale,
+        slug: SITE.authorSlug,
+        notes: notes.filter((note) => note.authorSlug === SITE.authorSlug),
+      },
+    },
+  ];
 }

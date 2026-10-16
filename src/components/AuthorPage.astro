@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import Footer from "../components/Footer.astro";
+import NoteRows from "../components/NoteRows.astro";
+import { SITE } from "../config";
+import { STRINGS, authorPath, formatNumber, localePath, type Locale } from "../i18n";
+import type { Note } from "../posts";
+
+export interface Props {
+  locale: Locale;
+  slug: string;
+  notes: Note[];
+}
+
+const { locale, slug, notes } = Astro.props;
+const other: Locale = locale === "en" ? "fa" : "en";
+const t = STRINGS[locale];
+const name = SITE.author[locale];
+const initial = [...name][0];
+const pageTitle = `${t.notesBy} ${name}`;
+const count = `${formatNumber(notes.length, locale)} ${locale === "fa" ? "یادداشت" : notes.length === 1 ? "note" : "notes"}`;
+const switchTo = { locale: other, href: authorPath(other, slug) };
+---
+
+<Base
+  locale={locale}
+  title={pageTitle}
+  description={`${pageTitle}. ${t.descriptor}`}
+  alternates={{ en: authorPath("en", slug), fa: authorPath("fa", slug) }}
+>
+  <header class="a-head dark">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="wrap a-head-in">
+      <SiteNav locale={locale} variant="article" switchTo={switchTo} />
+      <div class="a-head-body">
+        <p class="byline rise-in" style="--d:0ms">
+          <span class="avatar avatar-lg" aria-hidden="true">{initial}</span>
+          <span class="meta-text">{count}</span>
+        </p>
+        <h1 class="a-title rise-in" style="--d:120ms">{name}</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="sect">
+    <div class="wrap">
+      {
+        notes.length > 0 ? (
+          <NoteRows locale={locale} notes={notes} />
+        ) : (
+          <p class="empty">{t.noNotes}</p>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer locale={locale} back switchTo={switchTo} />
+</Base>

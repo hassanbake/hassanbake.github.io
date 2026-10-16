@@ -11,6 +11,9 @@ const posts = defineCollection({
     title: z.string(),
     // One or two sentences: standfirst, meta description and card summary.
     description: z.string(),
+    // One short line for the rows on the home and author pages. Falls back to
+    // `description`.
+    teaser: z.string().optional(),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     // Shown as a chip and used by the filter on the home page.

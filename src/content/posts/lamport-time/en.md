@@ -1,6 +1,7 @@
 ---
 title: "What time is it? Ordering events in a distributed system"
 description: Notes on Lamport's 1978 paper. Why wall clocks can't order events across machines, how logical clocks do it with a counter, and what that means when we design real systems.
+teaser: Why wall clocks can't order events across machines, and what a plain counter does instead.
 date: 2026-10-16
 category: System design
 tags: [system-design, distributed-systems]

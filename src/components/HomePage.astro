@@ -4,12 +4,13 @@ import SiteNav from "../components/SiteNav.astro";
 import Wordmark from "../components/Wordmark.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
+import NoteRows from "../components/NoteRows.astro";
 import {
   STRINGS,
-  formatDate,
   formatNumber,
   localePath,
   notePath,
+  siteDescription,
   type Locale,
 } from "../i18n";
 import { getNotes } from "../posts";
@@ -27,13 +28,12 @@ const categories = [...new Set(notes.map((n) => n.category))];
 const topics = SITE.topics[locale];
 const { email, github, linkedin } = SITE.contact;
 const helloHref = email ? `mailto:${email}` : github;
-const rowNumber = (i: number) => (locale === "fa" ? formatNumber(i + 2, locale) : String(i + 2).padStart(2, "0"));
 ---
 
 <Base
   locale={locale}
   title={SITE.name}
-  description={t.tagline}
+  description={siteDescription(locale)}
   alternates={{ en: localePath("en"), fa: localePath("fa") }}
 >
   <section class="hero dark">
@@ -46,6 +46,7 @@ const rowNumber = (i: number) => (locale === "fa" ? formatNumber(i + 2, locale) 
         <p class="kicker rise-in" style="--d:600ms"><span class="dot" aria-hidden="true"></span>{t.kicker}</p>
         <Wordmark big heading />
         <p class="tagline rise-in" style="--d:900ms">{t.tagline}</p>
+        <p class="descriptor rise-in" style="--d:1000ms">{t.descriptor}</p>
       </main>
     </div>
   </section>
@@ -96,19 +97,7 @@ const rowNumber = (i: number) => (locale === "fa" ? formatNumber(i + 2, locale) 
               <span class="feat-sum">{featured.data.description}</span>
             </a>
 
-            {rest.length > 0 && <ul class="rows">
-              {rest.map((note, i) => (
-                <li class="rv" data-category={note.category}>
-                  <a class="row" href={notePath(locale, note.slug)}>
-                    <span class="row-num" aria-hidden="true">{rowNumber(i)}</span>
-                    <span class="row-title">{note.data.title}</span>
-                    <span class="chip-static">{note.category}</span>
-                    <time class="row-date" datetime={note.data.date.toISOString()}>{formatDate(note.data.date, locale)}</time>
-                    <span class="row-arrow" aria-hidden="true">{locale === "fa" ? "←" : "→"}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>}
+            {rest.length > 0 && <NoteRows locale={locale} notes={rest} start={2} />}
           </>
         )
       }
@@ -130,7 +119,7 @@ const rowNumber = (i: number) => (locale === "fa" ? formatNumber(i + 2, locale) 
     </div>
   </section>
 
-  <Footer locale={locale} />
+  <Footer locale={locale} switchTo={{ locale: other, href: localePath(other) }} />
 
   <script>
     // Category chips filter the featured note and the rows client-side.
