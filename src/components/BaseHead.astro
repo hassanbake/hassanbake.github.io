@@ -63,7 +63,7 @@ const jsonLd = article
 {article?.authorUrl && <link rel="author" href={article.authorUrl} />}
 <link rel="canonical" href={canonical} />
 {
-  (locale === "fa" ? [vazirmatn] : [bricolage, sourceSans]).map((href) => (
+  (locale === "fa" ? [vazirmatn, bricolage] : [bricolage, sourceSans]).map((href) => (
     <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />
   ))
 }
