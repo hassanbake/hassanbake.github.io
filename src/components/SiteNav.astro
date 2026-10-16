@@ -5,7 +5,7 @@ import Wordmark from "./Wordmark.astro";
 
 export interface Props {
   locale: Locale;
-  /** "home" shows Notes / Art / Hello, "article" shows a back link, "art" shows Notes / Art. */
+  /** "home" shows Notes / Art, "article" shows a back link, "art" shows Notes / Art. */
   variant: "home" | "article" | "art";
   /** The same page in the other language, when it exists. */
   switchTo?: { locale: Locale; href: string };
@@ -26,7 +26,6 @@ const home = localePath(locale);
         <>
           <a href="#notes">{t.navNotes}</a>
           <a href={artPath(locale)}>{t.navArt}</a>
-          <a href="#hello">{t.navHello}</a>
         </>
       ) : variant === "art" ? (
         <>
