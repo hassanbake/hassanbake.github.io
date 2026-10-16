@@ -556,6 +556,33 @@ html[lang="fa"] .sect h2 {
   color: var(--tx3);
 }
 
+.follow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  margin: clamp(28px, 4vw, 48px) 0 0;
+}
+.follow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding-inline: 18px;
+  border: 1px solid var(--line3);
+  border-radius: 999px;
+  color: var(--tx);
+  text-decoration: none;
+}
+.follow-link:hover {
+  border-color: var(--ac);
+  color: var(--ac2);
+}
+.follow-hint {
+  color: var(--tx3);
+  font-size: 0.95rem;
+}
+
 /* Featured note: a DARK scope inside the light section */
 .feat {
   position: relative;
