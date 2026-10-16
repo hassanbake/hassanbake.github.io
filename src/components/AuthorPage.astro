@@ -20,6 +20,7 @@ const name = SITE.author[locale];
 const initial = [...name][0];
 const pageTitle = `${t.notesBy} ${name}`;
 const count = `${formatNumber(notes.length, locale)} ${locale === "fa" ? "یادداشت" : notes.length === 1 ? "note" : "notes"}`;
+const { email, github, linkedin } = SITE.contact;
 const switchTo = { locale: other, href: authorPath(other, slug) };
 ---
 
@@ -52,6 +53,15 @@ const switchTo = { locale: other, href: authorPath(other, slug) };
           <NoteRows locale={locale} notes={notes} />
         ) : (
           <p class="empty">{t.noNotes}</p>
+        )
+      }
+      {
+        email && (
+          <p class="a-contact">
+            {t.contactNote} <a href={`mailto:${email}`} dir="ltr">{email}</a>
+            {github && <> <span aria-hidden="true">·</span> <a href={github} rel="me noopener" dir="ltr">GitHub</a></>}
+            {linkedin && <> <span aria-hidden="true">·</span> <a href={linkedin} rel="me noopener" dir="ltr">LinkedIn</a></>}
+          </p>
         )
       }
     </div>

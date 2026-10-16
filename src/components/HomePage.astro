@@ -28,9 +28,6 @@ const t = STRINGS[locale];
 const notes = await getNotes(locale);
 const [featured, ...rest] = notes;
 const categories = [...new Set(notes.map((n) => n.category))];
-const topics = SITE.topics[locale];
-const { email, github, linkedin } = SITE.contact;
-const helloHref = email ? `mailto:${email}` : github;
 ---
 
 <Base
@@ -49,7 +46,6 @@ const helloHref = email ? `mailto:${email}` : github;
     <div class="wrap hero-in">
       <SiteNav locale={locale} variant="home" switchTo={{ locale: other, href: localePath(other) }} />
       <main class="hero-main">
-        <p class="kicker rise-in" style="--d:600ms"><span class="dot" aria-hidden="true"></span>{t.kicker}</p>
         <Wordmark big heading />
         <p class="tagline rise-in" style="--d:900ms">{t.tagline}</p>
         <p class="descriptor rise-in" style="--d:1000ms">{t.descriptor}</p>
@@ -57,19 +53,21 @@ const helloHref = email ? `mailto:${email}` : github;
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      {
-        [0, 1].map(() => (
-          <ul>
-            {topics.map((topic) => (
-              <li>{topic}<span class="sep">●</span></li>
-            ))}
-          </ul>
-        ))
-      }
-    </div>
-  </div>
+  {
+    categories.length > 0 && (
+      <div class="topic-strip">
+        <p class="wrap topic-line">
+          <span class="topic-label">{t.topics}</span>
+          {categories.map((c, i) => (
+            <>
+              {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+              <span>{c}</span>
+            </>
+          ))}
+        </p>
+      </div>
+    )
+  }
 
   <section class="sect" id="notes" aria-labelledby="notes-title">
     <div class="wrap">
@@ -130,21 +128,6 @@ const helloHref = email ? `mailto:${email}` : github;
       <div class="art-band-visual rv">
         <LiveSphere locale={locale} piece={FEATURED_PIECE} />
       </div>
-    </div>
-  </section>
-
-  <section class="hello dark" id="hello" aria-labelledby="hello-title">
-    <div class="wrap">
-      <h2 id="hello-title" class="visually-hidden">{t.navHello}</h2>
-      <a class="hello-link rv" href={helloHref}>
-        <span class="hello-text">{t.sayHello} <span aria-hidden="true">{locale === "fa" ? "←" : "→"}</span></span>
-      </a>
-      <ul class="contact rv">
-        {email && <li><a class="chip-link" href={`mailto:${email}`} dir="ltr">{email}</a></li>}
-        {github && <li><a class="chip-link" href={github} rel="me noopener">GitHub</a></li>}
-        {linkedin && <li><a class="chip-link" href={linkedin} rel="me noopener">LinkedIn</a></li>}
-        <li><a class="chip-link" href={localePath(locale, "/rss.xml")}>RSS</a></li>
-      </ul>
     </div>
   </section>
 

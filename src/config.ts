@@ -10,15 +10,10 @@ export const SITE = {
     en: "Roozbeh Maheronnaghsh",
     fa: "روزبه ماهرالنقش",
   } satisfies Record<Locale, string>,
-  // Contact chips in the "Say hello" band. Leave a value empty to hide it.
+  // Contact links in the footer and on the author page. Leave a value empty to hide it.
   contact: {
     email: "roozbeh@hassanbake.com",
     github: "https://github.com/hassanbake",
     linkedin: "https://www.linkedin.com/in/hassanbake",
   },
-  // Scrolling strip under the hero.
-  topics: {
-    en: ["Software architecture", "AI-assisted code", "System design", "Machine learning", "Blockchain", "Mental models"],
-    fa: ["معماری نرم‌افزار", "کدنویسی با هوش مصنوعی", "طراحی سیستم", "یادگیری ماشین", "بلاک‌چین", "مدل‌های ذهنی"],
-  } satisfies Record<Locale, string[]>,
 };
