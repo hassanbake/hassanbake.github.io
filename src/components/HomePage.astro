@@ -1,0 +1,153 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import Wordmark from "../components/Wordmark.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../config";
+import {
+  STRINGS,
+  formatDate,
+  formatNumber,
+  localePath,
+  notePath,
+  type Locale,
+} from "../i18n";
+import { getNotes } from "../posts";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const other: Locale = locale === "en" ? "fa" : "en";
+const t = STRINGS[locale];
+const notes = await getNotes(locale);
+const [featured, ...rest] = notes;
+const categories = [...new Set(notes.map((n) => n.category))];
+const topics = SITE.topics[locale];
+const { email, github, linkedin } = SITE.contact;
+const helloHref = email ? `mailto:${email}` : github;
+const rowNumber = (i: number) => (locale === "fa" ? formatNumber(i + 2, locale) : String(i + 2).padStart(2, "0"));
+---
+
+<Base
+  locale={locale}
+  title={SITE.name}
+  description={t.tagline}
+  alternates={{ en: localePath("en"), fa: localePath("fa") }}
+>
+  <section class="hero dark">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <SiteNav locale={locale} variant="home" switchTo={{ locale: other, href: localePath(other) }} />
+      <main class="hero-main">
+        <p class="kicker rise-in" style="--d:600ms"><span class="dot" aria-hidden="true"></span>{t.kicker}</p>
+        <Wordmark big heading />
+        <p class="tagline rise-in" style="--d:900ms">{t.tagline}</p>
+      </main>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      {
+        [0, 1].map(() => (
+          <ul>
+            {topics.map((topic) => (
+              <li>{topic}<span class="sep">●</span></li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="sect" id="notes" aria-labelledby="notes-title">
+    <div class="wrap">
+      <div class="sect-head rv">
+        <h2 id="notes-title">{t.latestNotes}</h2>
+        {
+          categories.length > 1 && (
+            <div class="chips" role="group" aria-label={t.latestNotes}>
+              <button type="button" class="chip active" data-filter="*" aria-pressed="true">{t.filterAll}</button>
+              {categories.map((c) => (
+                <button type="button" class="chip" data-filter={c} aria-pressed="false">{c}</button>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      {
+        !featured ? (
+          <p class="empty rv">{t.noNotes}</p>
+        ) : (
+          <>
+            <a class="feat rv" href={notePath(locale, featured.slug)} data-category={featured.category}>
+              <span class="feat-glow" aria-hidden="true"></span>
+              <span class="feat-meta">
+                <span class="badge">{t.newBadge}</span>
+                <span class="meta-text">{featured.category}</span>
+                <span class="meta-text">{formatNumber(featured.readingMinutes, locale)} {t.minRead}</span>
+              </span>
+              <span class="feat-title">{featured.data.title}</span>
+              <span class="feat-sum">{featured.data.description}</span>
+            </a>
+
+            {rest.length > 0 && <ul class="rows">
+              {rest.map((note, i) => (
+                <li class="rv" data-category={note.category}>
+                  <a class="row" href={notePath(locale, note.slug)}>
+                    <span class="row-num" aria-hidden="true">{rowNumber(i)}</span>
+                    <span class="row-title">{note.data.title}</span>
+                    <span class="chip-static">{note.category}</span>
+                    <time class="row-date" datetime={note.data.date.toISOString()}>{formatDate(note.data.date, locale)}</time>
+                    <span class="row-arrow" aria-hidden="true">{locale === "fa" ? "←" : "→"}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>}
+          </>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="hello dark" id="hello" aria-labelledby="hello-title">
+    <div class="wrap">
+      <h2 id="hello-title" class="visually-hidden">{t.navHello}</h2>
+      <a class="hello-link rv" href={helloHref}>
+        <span class="hello-text">{t.sayHello} <span aria-hidden="true">{locale === "fa" ? "←" : "→"}</span></span>
+      </a>
+      <ul class="contact rv">
+        {email && <li><a class="chip-link" href={`mailto:${email}`} dir="ltr">{email}</a></li>}
+        {github && <li><a class="chip-link" href={github} rel="me noopener">GitHub</a></li>}
+        {linkedin && <li><a class="chip-link" href={linkedin} rel="me noopener">LinkedIn</a></li>}
+        <li><a class="chip-link" href={localePath(locale, "/rss.xml")}>RSS</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <Footer locale={locale} />
+
+  <script>
+    // Category chips filter the featured note and the rows client-side.
+    const chips = document.querySelectorAll<HTMLButtonElement>(".chip[data-filter]");
+    const items = document.querySelectorAll<HTMLElement>("[data-category]");
+    chips.forEach((chip) =>
+      chip.addEventListener("click", () => {
+        const f = chip.dataset.filter!;
+        chips.forEach((c) => {
+          const on = c === chip;
+          c.classList.toggle("active", on);
+          c.setAttribute("aria-pressed", String(on));
+        });
+        items.forEach((el) => {
+          el.hidden = f !== "*" && el.dataset.category !== f;
+        });
+      }),
+    );
+  </script>
+</Base>

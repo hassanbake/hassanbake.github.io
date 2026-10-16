@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import Wordmark from "../components/Wordmark.astro";
+import { STRINGS, localePath } from "../i18n";
+
+const t = STRINGS.en;
+---
+
+<Base locale="en" title={t.notFound} description={t.notFound} noindex>
+  <main class="dark nf">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="nf-in">
+      <a href={localePath("en")}><Wordmark /></a>
+      <h1>404</h1>
+      <p>{t.notFound}</p>
+      <p class="nf-links"><a class="pill" href={localePath("en")}>{t.backHome}</a> <a class="pill" href={localePath("fa")} lang="fa" dir="rtl">{STRINGS.fa.backHome}</a></p>
+    </div>
+  </main>
+</Base>

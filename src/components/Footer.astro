@@ -1,0 +1,23 @@
+---
+import { STRINGS, localePath, type Locale } from "../i18n";
+import { SITE } from "../config";
+
+export interface Props {
+  locale: Locale;
+  /** Add a "back to all notes" link (article pages). */
+  back?: boolean;
+}
+
+const { locale, back = false } = Astro.props;
+const t = STRINGS[locale];
+const year = new Intl.NumberFormat(locale === "fa" ? "fa-IR" : "en-US", { useGrouping: false }).format(new Date().getFullYear());
+---
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p>
+      © {year} <span dir="ltr">{SITE.name}</span>. {t.rights}
+    </p>
+    {back && <a href={`${localePath(locale)}#notes`}>{t.backToTop} <span aria-hidden="true">↑</span></a>}
+  </div>
+</footer>

@@ -1,0 +1,27 @@
+---
+import BaseHead, { type Props as HeadProps } from "../components/BaseHead.astro";
+import { LOCALE_META } from "../i18n";
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource/source-sans-3/400.css";
+import "@fontsource/source-sans-3/500.css";
+import "@fontsource/source-sans-3/600.css";
+import "@fontsource/source-sans-3/400-italic.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource-variable/vazirmatn/index.css";
+import "../styles/global.css";
+
+export type Props = HeadProps;
+
+const { locale } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale} dir={LOCALE_META[locale].dir}>
+  <head>
+    <BaseHead {...Astro.props} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

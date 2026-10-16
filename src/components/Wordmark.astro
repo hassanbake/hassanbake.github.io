@@ -1,0 +1,26 @@
+---
+// "hassanbake", always lowercase and Latin. The big version animates letter
+// by letter; "bake" carries the shimmer gradient.
+export interface Props {
+  big?: boolean;
+  /** Render as the page <h1> (home hero). */
+  heading?: boolean;
+}
+
+const { big = false, heading = false } = Astro.props;
+const letters = [..."hassan"].map((ch, i) => ({ ch, i, bake: false }))
+  .concat([..."bake"].map((ch, i) => ({ ch, i: i + 6, bake: true })));
+const Tag = heading ? "h1" : "span";
+---
+
+{
+  big ? (
+    <Tag class="wordmark wordmark-big" dir="ltr" aria-label="hassanbake">
+      {letters.map(({ ch, i, bake }) => (
+        <span class:list={["wl", { bake }]} style={`--i:${i}`} aria-hidden="true">{ch}</span>
+      ))}
+    </Tag>
+  ) : (
+    <span class="wordmark" dir="ltr">hassan<span class="bake-text">bake</span></span>
+  )
+}
