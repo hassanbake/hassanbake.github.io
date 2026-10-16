@@ -285,6 +285,54 @@ html[dir="rtl"] .wl.bake {
   mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 75%);
 }
 
+/* Home hero: flat girih that draws itself once, fading out toward the wordmark */
+.hero-girih-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  --girih-fade: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.4) 50%, #000 100%);
+  -webkit-mask-image: var(--girih-fade);
+  mask-image: var(--girih-fade);
+  filter: blur(1.4px);
+}
+.hero-girih-layer svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-girih path {
+  stroke: var(--ac);
+  stroke-width: 1.5;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: girih-draw 2.1s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation-delay: calc(var(--d) + 300ms);
+}
+@keyframes girih-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.hero-girih.is-static path {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-girih path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+html[dir="rtl"] .hero-girih-layer {
+  --girih-fade: linear-gradient(270deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.4) 50%, #000 100%);
+}
+html[dir="rtl"] .hero-girih {
+  transform: scaleX(-1);
+}
+
 /* ---------- Nav ---------- */
 .nav {
   display: flex;

@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
 import NoteRows from "../components/NoteRows.astro";
 import LiveSphere from "../components/LiveSphere.astro";
+import girih from "../assets/hero-pattern-D.svg?raw";
 import { ART_CREDIT, FEATURED_PIECE, MADE_WITH, artPath } from "../art";
 import {
   STRINGS,
@@ -41,7 +42,7 @@ const helloHref = email ? `mailto:${email}` : github;
   <section class="hero dark">
     <div class="blob b1" aria-hidden="true"></div>
     <div class="blob b2" aria-hidden="true"></div>
-    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="hero-girih-layer" aria-hidden="true"><Fragment set:html={girih} /></div>
     <div class="wrap hero-in">
       <SiteNav locale={locale} variant="home" switchTo={{ locale: other, href: localePath(other) }} />
       <main class="hero-main">
