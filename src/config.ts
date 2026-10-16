@@ -15,7 +15,7 @@ export const SITE = {
   contact: {
     email: "roozbeh@hassanbake.com",
     github: "https://github.com/hassanbake",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/hassanbake",
   },
   // Scrolling strip under the hero.
   topics: {

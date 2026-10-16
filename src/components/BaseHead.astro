@@ -23,6 +23,8 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 const meta = LOCALE_META[locale];
 const otherLocales = (Object.keys(alternates) as Locale[]).filter((l) => l !== locale);
 
+const sameAs = [SITE.contact.github, SITE.contact.linkedin].filter(Boolean);
+
 const jsonLd = article
   ? {
       "@context": "https://schema.org",
@@ -33,7 +35,7 @@ const jsonLd = article
       inLanguage: locale,
       datePublished: article.published.toISOString(),
       dateModified: (article.modified ?? article.published).toISOString(),
-      author: { "@type": "Person", name: article.author, url: article.authorUrl },
+      author: { "@type": "Person", name: article.author, url: article.authorUrl, ...(article.authorUrl && sameAs.length ? { sameAs } : {}) },
       publisher: { "@type": "Organization", name: SITE.name },
       mainEntityOfPage: canonical,
       keywords: article.tags?.join(", "),
@@ -45,6 +47,7 @@ const jsonLd = article
       url: new URL(localePath(locale), site).href,
       inLanguage: locale,
       description,
+      ...(sameAs.length ? { sameAs } : {}),
     };
 ---
 
