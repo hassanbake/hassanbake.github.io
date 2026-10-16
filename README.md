@@ -81,6 +81,14 @@ published. To add a piece, add the WebP files, then an entry to `art.json`
 Brand rules: the name is always written `hassanBake` (capital B; URLs and the domain stay lowercase), and the site shows no
 bio, job title or company, only an author name.
 
+The portrait (`src/assets/portrait/`, helpers in `src/portrait.ts`) is the whole head and shoulders, never cropped
+tighter, never flipped (also not on the Persian pages, where only the layout around it mirrors), and always shown with
+the name only. Large images (home hero, page-head portrait, the site share card) use the Blend Navy duotone; small ones
+(scroll badge, bylines, article share cards) keep the original colours. The home hero sizes the photo as fractions of the
+hero height; the scroll badge is CSS-only (`animation-timeline`) and is left out where that is not supported or motion
+is reduced. The files come from `brand/portrait/` (rebuild with its `gen_photo_assets.py` when a larger original
+arrives; the source is 460 px, so the hero is slightly soft).
+
 Fonts are installed from npm (`@fontsource*`) and bundled at build time.
 Persian uses IRANYekan when licensed web files are provided, otherwise
 Vazirmatn (OFL). To add IRANYekan, put the licensed `.woff2` files in
@@ -109,4 +117,4 @@ and all internal links are relative, so nothing else changes.
 
 ## Share images
 
-Every note, art piece and the site itself gets a 1200×630 Open Graph image, generated at build time by `src/pages/og/[...path].png.ts` (card layout in `src/og/card.ts`, list of cards in `src/og.ts`). It uses the Blend Navy colours, the hero girih pattern, the title, the author name and the hassanBake mark, mirrored for Persian; art pieces also show the artwork. Setting `image:` in a note's front matter overrides it.
+Every note, art piece and the site itself gets a 1200×630 Open Graph image, generated at build time by `src/pages/og/[...path].png.ts` (card layout in `src/og/card.ts`, list of cards in `src/og.ts`). It uses the Blend Navy colours, the hero girih pattern, the title, the author name and the hassanBake mark, mirrored for Persian; art pieces also show the artwork. The site card and the notes by the site's author carry the portrait (duotone on the site card, original colours on article cards). Setting `image:` in a note's front matter overrides it.

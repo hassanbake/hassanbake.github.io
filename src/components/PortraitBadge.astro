@@ -1,0 +1,23 @@
+---
+// The portrait as a small round badge that fades in at the top corner once the reader has
+// scrolled past the page head. CSS only (scroll-driven animation); without support it is
+// simply always visible. Links to the author page, or is purely decorative on that page.
+import { PORTRAIT } from "../portrait";
+import { SITE } from "../config";
+import { authorPath, type Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+  /** On the author page itself the badge does not link anywhere. */
+  here?: boolean;
+}
+
+const { locale, here = false } = Astro.props;
+const name = SITE.author[locale];
+const Tag = here ? "span" : "a";
+const attrs = here ? { "aria-hidden": "true" } : { href: authorPath(locale, SITE.authorSlug), "aria-label": name, title: name };
+---
+
+<Tag class="travel-badge" {...attrs}>
+  <img src={PORTRAIT.badge} width="86" height="86" alt="" decoding="async" />
+</Tag>

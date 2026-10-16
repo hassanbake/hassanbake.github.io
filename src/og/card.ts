@@ -31,6 +31,7 @@ function loadFonts() {
     { name: "Bricolage", data: font("@fontsource/bricolage-grotesque", "bricolage-grotesque-latin-700-normal"), weight: 700 as const, style: "normal" as const },
     { name: "Source", data: font("@fontsource/source-sans-3", "source-sans-3-latin-400-normal"), weight: 400 as const, style: "normal" as const },
     { name: "Source", data: font("@fontsource/source-sans-3", "source-sans-3-latin-600-normal"), weight: 600 as const, style: "normal" as const },
+    { name: "Mono", data: font("@fontsource/jetbrains-mono", "jetbrains-mono-latin-500-normal"), weight: 500 as const, style: "normal" as const },
     ...vazir(600),
     ...vazir(700),
     ...vazir(800),
@@ -72,6 +73,10 @@ export interface CardInput {
   detail?: string;
   /** Public path of an artwork to show on the opposite side of the text. */
   artwork?: string;
+  /** Cards with the portrait: the site card (duotone) or an article card (original colours). */
+  portrait?: "site" | "article";
+  /** Article card: reading time next to the category pill. */
+  readTime?: string;
 }
 
 function titleSize(title: string, rtl: boolean) {
@@ -82,6 +87,7 @@ function titleSize(title: string, rtl: boolean) {
 
 export async function renderCard(input: CardInput): Promise<Buffer> {
   fontCache ??= loadFonts();
+  if (input.portrait) return renderPortraitCard(input);
   const rtl = input.locale === "fa";
   const display = rtl ? "Vazirmatn" : "Bricolage";
   const body = rtl ? "Vazirmatn" : "Source";
@@ -194,4 +200,118 @@ export async function renderCard(input: CardInput): Promise<Buffer> {
 
   const svg = await satori(tree as never, { width: W, height: H, fonts: fontCache });
   return Buffer.from(new Resvg(svg, { fitTo: { mode: "width", value: W } }).render().asPng());
+}
+
+// ---------- Cards with the portrait (brand/portrait/README.md) ----------
+// The photo is never flipped, also on the Persian cards; there the layout is mirrored around it.
+
+const photo = async (file: string, size: number) =>
+  `data:image/jpeg;base64,${(await sharp(read(file)).resize(size, size).jpeg({ quality: 90 }).toBuffer()).toString("base64")}`;
+
+export async function renderPortraitCard(input: CardInput): Promise<Buffer> {
+  fontCache ??= loadFonts();
+  const rtl = input.locale === "fa";
+  const dir = rtl ? "rtl" : "ltr";
+  const isSite = input.portrait === "site";
+  const display = rtl ? "Vazirmatn" : "Bricolage";
+  const mono = rtl ? "Vazirmatn" : "Mono";
+  const side = (px: number) => (rtl ? { right: px } : { left: px });
+  const edge = (px: number) => (rtl ? { left: px } : { right: px });
+  const align = rtl ? "flex-end" : "flex-start";
+
+  // Photo: site card 630 px square, full height; article card 560 px, 70 px from the top.
+  const size = isSite ? 630 : 560;
+  const top = isSite ? 0 : H - size;
+  const src = await photo(isSite ? "src/assets/portrait/og-site.webp" : "src/assets/portrait/og-article.webp", size);
+  const fade = isSite ? 88 : 80;
+  const photoLeft = W - size; // distance from the text side to the photo when LTR
+
+  const wordmark = (px: number) =>
+    h("div", { fontFamily: "Bricolage", fontWeight: 800, fontSize: px, letterSpacing: -px * 0.045, lineHeight: 0.9, direction: "ltr" }, [
+      h("div", { color: TX }, "hassan"),
+      h("div", { color: AC }, "Bake"),
+    ]);
+  const name = (px: number) =>
+    h("div", { direction: dir, fontFamily: mono, fontWeight: rtl ? 600 : 500, fontSize: rtl ? px + 2 : px, letterSpacing: rtl ? 0 : px * 0.06, color: TX3 }, input.byline ?? "");
+
+  const column = isSite
+    ? h(
+        "div",
+        { position: "absolute", top: 64, bottom: 64, ...side(64), width: 560, flexDirection: "column", justifyContent: "space-between", alignItems: align, textAlign: rtl ? "right" : "left" },
+        [
+          h("div", { direction: dir, fontFamily: mono, fontWeight: rtl ? 600 : 500, fontSize: rtl ? 24 : 22, letterSpacing: rtl ? 0 : 2, textTransform: rtl ? "none" : "uppercase", color: TX2 }, input.eyebrow ?? ""),
+          h("div", { flexDirection: "column", gap: 22, alignItems: align }, [
+            wordmark(112),
+            h("div", { direction: dir, fontFamily: display, fontWeight: rtl ? 700 : 700, fontSize: rtl ? 40 : 44, lineHeight: rtl ? 1.4 : 1.1, letterSpacing: rtl ? 0 : -0.9, color: TX }, input.title),
+          ]),
+          name(20),
+        ],
+      )
+    : h(
+        "div",
+        { position: "absolute", top: 56, bottom: 64, ...side(64), width: 700, flexDirection: "column", justifyContent: "space-between", alignItems: align, textAlign: rtl ? "right" : "left" },
+        [
+          h("div", { direction: dir, alignItems: "center", gap: 16 }, [
+            input.eyebrow
+              ? h("div", { fontFamily: mono, fontWeight: rtl ? 600 : 500, fontSize: 20, letterSpacing: rtl ? 0 : 1.5, textTransform: rtl ? "none" : "uppercase", color: BG, background: AC, padding: rtl ? "4px 16px 8px" : "6px 16px", borderRadius: 18 }, input.eyebrow)
+              : null,
+            input.readTime
+              ? h("div", { fontFamily: mono, fontWeight: rtl ? 600 : 500, fontSize: 20, letterSpacing: rtl ? 0 : 1.5, textTransform: rtl ? "none" : "uppercase", color: TX3 }, input.readTime)
+              : null,
+          ].filter(Boolean)),
+          h(
+            "div",
+            {
+              direction: dir,
+              fontFamily: display,
+              fontWeight: 800,
+              fontSize: articleTitleSize(input.title, rtl),
+              lineHeight: rtl ? 1.45 : 1,
+              letterSpacing: rtl ? 0 : -2.6,
+              color: TX,
+              lineClamp: 4,
+              maxWidth: 660,
+              textAlign: rtl ? "right" : "left",
+            },
+            input.title,
+          ),
+          h("div", { direction: dir, alignItems: "center", gap: 16 }, [
+            wordmark(30),
+            h("div", { width: 1, height: 26, background: "#2E3F63" }, ""),
+            name(20),
+          ]),
+        ],
+      );
+
+  const tree = h("div", { position: "relative", width: W, height: H, background: BG, overflow: "hidden" }, [
+    h("div", {
+      position: "absolute", top: 0, left: 0, width: W, height: H,
+      background: `radial-gradient(ellipse at ${rtl ? 22 : 78}% 40%, rgba(59,91,219,0.22), transparent 62%)`,
+    }),
+    // Girih: faint on the site card; on the article card it shows through toward the photo.
+    {
+      type: "img",
+      props: { src: dataUri(girihSvg(rtl)), width: W, height: H, style: { position: "absolute", top: 0, left: 0, opacity: isSite ? 0.28 : 0.5 } },
+    },
+    h("div", {
+      position: "absolute", top: 0, left: 0, width: W, height: H,
+      background: `linear-gradient(${rtl ? "270deg" : "90deg"}, ${BG} 0%, rgba(11,18,32,0.9) ${isSite ? 18 : 22}%, rgba(11,18,32,0) ${isSite ? 52 : 60}%)`,
+    }),
+    { type: "img", props: { src, width: size, height: size, style: { position: "absolute", top, ...edge(0) } } },
+    h("div", {
+      position: "absolute", top, width: fade, height: size,
+      ...(rtl ? { left: size - fade } : { left: photoLeft }),
+      background: `linear-gradient(${rtl ? "270deg" : "90deg"}, ${BG} 0%, rgba(11,18,32,0) 100%)`,
+    }),
+    column,
+  ]);
+
+  const svg = await satori(tree as never, { width: W, height: H, fonts: fontCache });
+  return Buffer.from(new Resvg(svg, { fitTo: { mode: "width", value: W } }).render().asPng());
+}
+
+function articleTitleSize(title: string, rtl: boolean) {
+  const n = [...title].length;
+  const base = n <= 34 ? 74 : n <= 52 ? 64 : n <= 72 ? 54 : 46;
+  return rtl ? Math.round(base * 0.82) : base;
 }

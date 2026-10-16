@@ -1,0 +1,18 @@
+---
+// The large duotone head at the top corner of a page head. It bleeds off the top, fades into
+// the page at the bottom, and is replaced by the round badge as the reader scrolls.
+import { PORTRAIT } from "../portrait";
+import { SITE } from "../config";
+import type { Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<div class="portrait-head travel-head">
+  <img src={PORTRAIT.head} width="250" height="250" alt={SITE.author[locale]} loading="eager" fetchpriority="high" decoding="async" />
+  <span class="portrait-head-fade" aria-hidden="true"></span>
+</div>
