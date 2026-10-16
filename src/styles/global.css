@@ -1,0 +1,404 @@
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: "IRANYekan";
+  src: url("/fonts/BYekan-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANYekan";
+  src: url("/fonts/BYekan-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Base ---------- */
+:root {
+  --brand-navy: #23366c;
+  --brand-red: #b50952;
+  --text: #111;
+  --muted: #555;
+  --border: #eee;
+  --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  color: var(--text);
+  background-color: #fff;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+
+html[lang="fa"] body {
+  font-family: "IRANYekan", system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+a {
+  color: var(--brand-navy);
+}
+
+/* ---------- Layout ---------- */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
+  padding: 2rem 1rem;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.lang-switch {
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lang-switch[lang="fa"] {
+  font-family: "IRANYekan", system-ui, sans-serif;
+}
+
+.lang-switch[lang="en"] {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.lang-switch:hover {
+  color: var(--brand-red);
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* ---------- Home ---------- */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  padding-top: 4rem;
+}
+
+.center-content {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.main-logo {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-b {
+  color: var(--brand-red);
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 500;
+  color: #444;
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.post-list {
+  width: 100%;
+  max-width: 720px;
+}
+
+.post-list h2 {
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.post-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-list li a {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.post-list li a:hover {
+  color: var(--brand-red);
+}
+
+.post-list time {
+  display: block;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.post-list li p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+.post-list .empty {
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.site-footer a {
+  color: inherit;
+}
+
+/* ---------- Article ---------- */
+.article-page {
+  padding: 3rem 1rem;
+}
+
+.article-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 3rem;
+}
+
+.article-container,
+.article-content,
+.prose {
+  min-width: 0;
+}
+
+.article-meta {
+  position: relative;
+}
+
+.author-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  position: sticky;
+  top: 2rem;
+  background: #fff;
+}
+
+.author-card img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.author-card h3 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1rem;
+}
+
+.author-role {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.author-card time {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+/* ---------- Prose ---------- */
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+html[lang="fa"] .prose {
+  line-height: 1.9;
+}
+
+.prose h1 {
+  margin-top: 0;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: 2.5rem;
+}
+
+.prose p {
+  margin: 1.2rem 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+.prose :not(pre) > code {
+  background: #f3f3f3;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  unicode-bidi: isolate;
+}
+
+.prose pre {
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  direction: ltr;
+  text-align: left;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  margin: 1.5rem 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--brand-red);
+  color: var(--muted);
+}
+
+.prose table {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.7rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .article-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-card {
+    position: static;
+    max-width: 360px;
+    margin: 2rem auto 0;
+  }
+
+  .prose {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 1rem;
+  }
+
+  .home {
+    padding-top: 2rem;
+  }
+}

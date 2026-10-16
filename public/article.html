@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>Redirecting…</title>
+  <script>
+    // Old links looked like /article.html?slug=<slug>&lang=<en|fa>.
+    var p = new URLSearchParams(location.search);
+    var slug = p.get("slug");
+    var target = slug
+      ? (p.get("lang") === "fa" ? "/fa" : "") + "/posts/" + encodeURIComponent(slug) + "/"
+      : "/";
+    location.replace(target);
+  </script>
+</head>
+<body><a href="/">hassanBake</a></body>
+</html>

@@ -1,0 +1,118 @@
+---
+import { SITE } from "../config";
+import { LOCALE_META, localePath, type Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  image?: string;
+  /** Paths of this page in each language that has it, used for hreflang. */
+  alternates?: Partial<Record<Locale, string>>;
+  article?: { published: Date; modified?: Date; tags?: string[] };
+  noindex?: boolean;
+}
+
+const { locale, title, description, image, alternates = {}, article, noindex } =
+  Astro.props;
+
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname, site).href;
+const imageUrl = new URL(image ?? SITE.defaultImage, site).href;
+const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
+const meta = LOCALE_META[locale];
+const otherLocales = (Object.keys(alternates) as Locale[]).filter(
+  (l) => l !== locale,
+);
+const author = SITE.author[locale].name;
+
+const jsonLd = article
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: title,
+      description,
+      image: imageUrl,
+      inLanguage: locale,
+      datePublished: article.published.toISOString(),
+      dateModified: (article.modified ?? article.published).toISOString(),
+      author: { "@type": "Person", name: author },
+      publisher: { "@type": "Organization", name: SITE.name },
+      mainEntityOfPage: canonical,
+      keywords: article.tags?.join(", "),
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE.name,
+      url: new URL(localePath(locale), site).href,
+      inLanguage: locale,
+      description,
+    };
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#ffffff" />
+
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${SITE.name} (${meta.label})`}
+  href={new URL(localePath(locale, "/rss.xml"), site)}
+/>
+
+{
+  Object.entries(alternates).map(([lang, path]) => (
+    <link rel="alternate" hreflang={lang} href={new URL(path, site)} />
+  ))
+}
+{
+  alternates.en && (
+    <link rel="alternate" hreflang="x-default" href={new URL(alternates.en, site)} />
+  )
+}
+
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:type" content={article ? "article" : "website"} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:locale" content={meta.ogLocale} />
+{
+  otherLocales.map((l) => (
+    <meta property="og:locale:alternate" content={LOCALE_META[l].ogLocale} />
+  ))
+}
+{
+  article && (
+    <>
+      <meta property="article:published_time" content={article.published.toISOString()} />
+      {article.modified && (
+        <meta property="article:modified_time" content={article.modified.toISOString()} />
+      )}
+      <meta property="article:author" content={author} />
+      {article.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+    </>
+  )
+}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

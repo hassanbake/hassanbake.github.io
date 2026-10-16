@@ -1,0 +1,19 @@
+---
+import { STRINGS, localePath, type Locale } from "../i18n";
+import { SITE } from "../config";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = STRINGS[locale];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <p>
+    © {year} {SITE.name}. {t.rights}
+    · <a href={localePath(locale, "/rss.xml")}>{t.rss}</a>
+  </p>
+</footer>

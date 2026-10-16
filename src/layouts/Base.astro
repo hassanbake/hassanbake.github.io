@@ -1,0 +1,26 @@
+---
+import BaseHead, { type Props as HeadProps } from "../components/BaseHead.astro";
+import Header, { type Props as HeaderProps } from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { LOCALE_META } from "../i18n";
+import "../styles/global.css";
+
+export type Props = HeadProps & Pick<HeaderProps, "switchTo">;
+
+const { switchTo, ...head } = Astro.props;
+const { locale } = head;
+---
+
+<!doctype html>
+<html lang={locale} dir={LOCALE_META[locale].dir}>
+  <head>
+    <BaseHead {...head} />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <Header locale={locale} switchTo={switchTo} />
+      <slot />
+      <Footer locale={locale} />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import { STRINGS } from "../i18n";
+
+const t = STRINGS.en;
+---
+
+<Base locale="en" title={t.notFound} description={t.notFound} noindex>
+  <main class="site-main">
+    <div class="center-content">
+      <h1 class="hero-title">404</h1>
+      <p class="hero-subtitle">{t.notFound}</p>
+      <p><a href="/">{t.backHome}</a> · <a href="/fa/" lang="fa">{STRINGS.fa.backHome}</a></p>
+    </div>
+  </main>
+</Base>

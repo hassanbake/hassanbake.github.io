@@ -1,0 +1,27 @@
+---
+import { LOCALE_META, localePath, type Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+  /** The same page in the other language, when it exists. */
+  switchTo?: { locale: Locale; href: string };
+}
+
+const { locale, switchTo } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-left">
+    <a href={localePath(locale)} aria-label="hassanBake">
+      <img src="/images/logo-header.png" alt="hassanBake logo" class="header-logo" width="1069" height="290" />
+    </a>
+    {
+      switchTo && (
+        <a class="lang-switch" href={switchTo.href} hreflang={switchTo.locale} lang={switchTo.locale}>
+          {LOCALE_META[switchTo.locale].label}
+        </a>
+      )
+    }
+  </div>
+  <nav class="header-nav"></nav>
+</header>
