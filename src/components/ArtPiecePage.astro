@@ -5,7 +5,7 @@ import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { ART_CREDIT, ART_PIECES, ART_SERIES, MADE_WITH, artPath, type ArtPiece } from "../art";
 import { ogPath } from "../og/paths";
-import { STRINGS, formatNumber, type Locale } from "../i18n";
+import { STRINGS, formatYear, type Locale } from "../i18n";
 
 export interface Props {
   locale: Locale;
@@ -53,7 +53,7 @@ const arrow = locale === "fa" ? { prev: "→", next: "←" } : { prev: "←", ne
         <div class="piece-text">
           <p class="a-meta rise-in" style="--d:0ms">
             <a class="badge" href={`${artPath(locale)}#series-${series.id}`}>{series.title[locale]}</a>
-            <span class="meta-text">{formatNumber(piece.year, locale).replace(/[,٬]/g, "")}</span>
+            <span class="meta-text">{formatYear(new Date(Date.UTC(piece.year, 5, 1)), locale)}</span>
           </p>
           <h1 class="a-title piece-title rise-in" style="--d:120ms">{piece.title[locale]}</h1>
           <p class="a-stand rise-in" style="--d:240ms">{piece.summary[locale]}</p>

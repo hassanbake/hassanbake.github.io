@@ -37,7 +37,11 @@ draft: false
 برداشت شود. بیشتر سیستم‌ها تکرار را انتخاب می‌کنند چون بیشتر خطاها گذرا هستند.
 مقاله‌ی Marc Brooker درباره‌ی retry شرطش را ساده گفته است:
 
+<div class="en-block" dir="ltr" lang="en">
+
 > In general, our view is that APIs with side effects aren't safe to retry unless they provide idempotency.
+
+</div>
 
 یعنی APIهایی که اثر جانبی دارند، مگر idempotency داشته باشند، تکرارشان امن نیست.
 عملیات **idempotent** است اگر دوبار انجام دادنش همان اثر یک‌بار را داشته باشد.
@@ -168,9 +172,13 @@ wait = random(0, min(cap, base * 2^attempt))
 
 ## منابع
 
+<div class="en-block" dir="ltr">
+
 - Brandur Leach. [*Designing robust and predictable APIs with idempotency*](https://stripe.com/blog/idempotency).
   Stripe Blog، ۲۲ فوریه ۲۰۱۷.
 - Marc Brooker. [*Timeouts, retries, and backoff with jitter*](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter).
   Amazon Builders' Library، ۵ دسامبر ۲۰۱۹.
 - Marc Brooker. [*Exponential Backoff And Jitter*](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/).
   AWS Architecture Blog، ۴ مارس ۲۰۱۵.
+
+</div>

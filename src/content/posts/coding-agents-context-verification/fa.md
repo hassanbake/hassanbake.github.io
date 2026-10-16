@@ -31,7 +31,11 @@ draft: false
 بنویسیم، بلکه این است که در هر قدم چه اطلاعاتی، از ابزار و فایل تا تاریخچه‌ی
 پیام‌ها، باید در پنجره باشد. جمله‌شان صریح است:
 
+<div class="en-block" dir="ltr" lang="en">
+
 > Context, therefore, must be treated as a finite resource with diminishing marginal returns.
+
+</div>
 
 یعنی context را باید منبعی محدود دانست که بازده نهایی‌اش کم می‌شود. آن‌ها از
 *context rot* هم حرف می‌زنند: هرچه پنجره پرتر شود، توان مدل در یادآوری چیزهای
@@ -64,7 +68,11 @@ draft: false
 
 این جمله از راهنمای Claude Code شیوه‌ی کار مرا عوض کرد:
 
+<div class="en-block" dir="ltr" lang="en">
+
 > Claude stops when the work looks done. Without a check it can run, "looks done" is the only signal available, and you become the verification loop.
+
+</div>
 
 یعنی ایجنت وقتی می‌ایستد که کار تمام‌شده به نظر برسد، و اگر چکی نداشته باشد که
 بتواند اجرایش کند، «به نظر تمام است» تنها سیگنال است و خودِ شما حلقه‌ی بررسی
@@ -155,6 +163,8 @@ METR در ۲۰۲۵
 
 ## منابع
 
+<div class="en-block" dir="ltr">
+
 - Rajasekaran, Dixon, Ryan, Hadfield و دیگران، Anthropic.
   [*Effective context engineering for AI agents*](https://anthropic.com/engineering/effective-context-engineering-for-ai-agents).
   Anthropic Engineering، ۲۹ سپتامبر ۲۰۲۵.
@@ -164,3 +174,5 @@ METR در ۲۰۲۵
 - METR.
   [*Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/).
   ۱۰ ژوئیه ۲۰۲۵.
+
+</div>

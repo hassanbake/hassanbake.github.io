@@ -1,6 +1,6 @@
 ---
 import { SITE } from "../config";
-import { LOCALE_META, localePath, type Locale } from "../i18n";
+import { LOCALE_META, STRINGS, localePath, type Locale } from "../i18n";
 import { ogPath } from "../og/paths";
 import bricolage from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
 import sourceSans from "@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2?url";
@@ -23,7 +23,7 @@ const { locale, title, description, image, alternates = {}, article, noindex } =
 const site = Astro.site!;
 const canonical = new URL(Astro.url.pathname, site).href;
 const imageUrl = new URL(image ?? ogPath.site(locale), site).href;
-const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
+const fullTitle = title === SITE.name ? `${SITE.name} · ${STRINGS[locale].tagline}` : `${title} | ${SITE.name}`;
 const meta = LOCALE_META[locale];
 const otherLocales = (Object.keys(alternates) as Locale[]).filter((l) => l !== locale);
 

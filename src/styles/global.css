@@ -359,6 +359,7 @@ html[dir="rtl"] .hero-girih {
 .nav-links a {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: 44px;
   padding-inline: 10px;
   color: var(--tx2);
@@ -403,11 +404,29 @@ html[dir="rtl"] .arrow-back {
     padding-inline: 12px;
   }
 }
+@media (max-width: 380px) {
+  .nav-brand {
+    font-size: 19px;
+  }
+  .nav-links a {
+    padding-inline: 4px;
+    font-size: 0.875rem;
+  }
+  .nav-links .pill {
+    padding-inline: 10px;
+  }
+}
 
 /* ---------- Hero ---------- */
 .hero {
   min-height: min(100vh, 820px);
   display: flex;
+}
+/* On phones a shorter hero keeps the girih at the size it was drawn for. */
+@media (max-width: 700px) {
+  .hero {
+    min-height: min(100svh, 620px);
+  }
 }
 .hero-in {
   display: flex;
@@ -420,6 +439,11 @@ html[dir="rtl"] .arrow-back {
   flex-direction: column;
   justify-content: center;
   padding-block: clamp(32px, 6vw, 72px) clamp(48px, 8vw, 96px);
+}
+@media (max-width: 700px) {
+  .hero-main {
+    justify-content: flex-end;
+  }
 }
 
 .tagline {
@@ -653,7 +677,7 @@ html[lang="fa"] .meta-text {
   letter-spacing: var(--ls-head);
 }
 html[lang="fa"] .feat-title {
-  line-height: 1.5;
+  line-height: 1.35;
   max-width: 24ch;
 }
 .feat-sum {
@@ -870,6 +894,23 @@ html[dir="rtl"] .progress {
 .a-head {
   padding-bottom: clamp(40px, 7vw, 96px);
 }
+.a-head + .sect {
+  padding-top: clamp(32px, 5vw, 64px);
+}
+/* No lone last words on headings, no orphans in paragraphs. */
+.feat-title,
+.row-title,
+.a-title,
+.sect-head h2,
+.art-band h2 {
+  text-wrap: balance;
+}
+.prose p,
+.a-stand,
+.feat-sum,
+.row-sum {
+  text-wrap: pretty;
+}
 .a-head-body {
   padding-top: clamp(24px, 5vw, 64px);
 }
@@ -893,10 +934,10 @@ html[dir="rtl"] .progress {
 html[lang="fa"] .a-title {
   max-width: 26ch;
   font-size: clamp(26px, 1.1rem + 1.7vw, 42px);
-  line-height: 1.5;
+  line-height: 1.4;
 }
 .a-stand {
-  max-width: 44ch;
+  max-width: 60ch;
   margin: clamp(16px, 2.5vw, 32px) 0 0;
   font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
   line-height: 1.6;
@@ -911,6 +952,9 @@ html[lang="fa"] .a-title {
   font-weight: 500;
 }
 .byline-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: inherit;
   text-decoration: underline;
   text-decoration-color: var(--line3);
@@ -1032,12 +1076,12 @@ html[lang="fa"] .toc-title {
   min-width: 0;
   max-width: 700px;
   font-size: clamp(18px, 1.5vw, 20px);
-  line-height: 1.75;
+  line-height: 1.68;
   counter-reset: h2;
 }
 html[lang="fa"] .prose {
   font-size: clamp(17px, 1.4vw, 19px);
-  line-height: 2.15;
+  line-height: 1.95;
 }
 .prose > :first-child {
   margin-top: 0;
@@ -1468,9 +1512,19 @@ html[lang="fa"] .art-band h2 {
   margin: clamp(20px, 3vw, 32px) 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(16px, 2.5vw, 28px);
   align-items: start;
+}
+@media (max-width: 900px) {
+  .art-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .art-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 .art-card {
   display: flex;

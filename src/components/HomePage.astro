@@ -74,7 +74,7 @@ const categories = [...new Set(notes.map((n) => n.category))];
       <div class="sect-head rv">
         <h2 id="notes-title">{t.latestNotes}</h2>
         {
-          categories.length > 1 && (
+          categories.length > 1 && notes.length >= 6 && (
             <div class="chips" role="group" aria-label={t.latestNotes}>
               <button type="button" class="chip active" data-filter="*" aria-pressed="true">{t.filterAll}</button>
               {categories.map((c) => (
@@ -101,7 +101,7 @@ const categories = [...new Set(notes.map((n) => n.category))];
               <span class="feat-sum">{featured.data.description}</span>
             </a>
 
-            {rest.length > 0 && <NoteRows locale={locale} notes={rest} start={2} />}
+            {rest.length > 0 && <NoteRows locale={locale} notes={rest} />}
           </>
         )
       }
