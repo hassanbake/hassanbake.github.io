@@ -4,7 +4,7 @@ import Base from "../layouts/Base.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
-import { STRINGS, formatDate, formatNumber, notePath, type Locale } from "../i18n";
+import { STRINGS, authorPath, formatDate, formatNumber, notePath, type Locale } from "../i18n";
 import type { Note } from "../posts";
 
 export interface Props {
@@ -16,11 +16,13 @@ export interface Props {
 }
 
 const { note, translation, more = [] } = Astro.props;
-const { locale, slug, data, author } = note;
+const { locale, slug, data, author, authorSlug } = note;
 const t = STRINGS[locale];
 const { Content, headings } = await render(note);
 const toc = headings.filter((h) => h.depth === 2);
 const initial = [...author][0];
+const authorHref = authorSlug ? authorPath(locale, authorSlug) : undefined;
+const switchTo = translation && { locale: translation.locale, href: notePath(translation.locale, slug) };
 
 const alternates: Partial<Record<Locale, string>> = { [locale]: notePath(locale, slug) };
 if (translation) alternates[translation.locale] = notePath(translation.locale, slug);
@@ -32,7 +34,13 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
   description={data.description}
   image={data.image}
   alternates={alternates}
-  article={{ published: data.date, modified: data.updated, tags: data.tags, author }}
+  article={{
+    published: data.date,
+    modified: data.updated,
+    tags: data.tags,
+    author,
+    authorUrl: authorHref && new URL(authorHref, Astro.site).href,
+  }}
 >
   <div class="progress" aria-hidden="true"></div>
 
@@ -44,7 +52,7 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
       <SiteNav
         locale={locale}
         variant="article"
-        switchTo={translation && { locale: translation.locale, href: notePath(translation.locale, slug) }}
+        switchTo={switchTo}
       />
       <div class="a-head-body">
         <p class="a-meta rise-in" style="--d:0ms">
@@ -56,8 +64,18 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
         <p class="a-stand rise-in" style="--d:240ms">{data.description}</p>
         <p class="byline rise-in" style="--d:360ms">
           <span class="avatar" aria-hidden="true">{initial}</span>
-          <span>{author}</span>
+          {authorHref ? <a class="byline-name" href={authorHref}>{author}</a> : <span>{author}</span>}
         </p>
+        {
+          switchTo && (
+            <p class="a-lang rise-in" style="--d:440ms">
+              <a href={switchTo.href} hreflang={switchTo.locale}>
+                {t.readInOther}
+                <span aria-hidden="true">{locale === "fa" ? "←" : "→"}</span>
+              </a>
+            </p>
+          )
+        }
       </div>
     </div>
   </header>
@@ -105,7 +123,7 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
     )
   }
 
-  <Footer locale={locale} back />
+  <Footer locale={locale} back switchTo={switchTo} />
 
   <script>
     // Highlight the table-of-contents entry for the section being read.

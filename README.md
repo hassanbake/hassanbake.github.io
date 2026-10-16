@@ -28,9 +28,11 @@ Front matter:
 ---
 title: Gradient Descent Basics
 description: One or two sentences, used as standfirst, SEO description and card summary.
+teaser: One short line for the rows on the home and author pages   # optional, defaults to description
 date: 2026-10-16
 category: Machine learning     # chip + home filter; defaults to "Notes" / «یادداشت»
 author: Name Surname           # optional byline, defaults to the site author in src/config.ts
+                               # (the default author links to /authors/<slug>/, other names do not)
 tags: [optimization]
 image: /my-cover.png           # optional link preview, under public/; defaults to /og-default.png
 draft: false                   # drafts show only in `npm run dev`
@@ -44,10 +46,18 @@ list), code with a file-name bar (` ```ts title="file.ts" `) and a callout
 (`<div class="callout">` with blank lines around the Markdown inside).
 `src/content/posts/hello-world` is a draft showing all of them.
 
-A note with only one language still works; the language switch appears only
-when a translation exists. The newest note is featured on the home page.
+A note with only one language still works; the language switch (nav, footer
+and a "Read this note in ..." link under the byline) appears only when a
+translation exists. The newest note is featured on the home page.
 
-URLs: `/notes/<slug>/`, `/fa/notes/<slug>/`. Feeds: `/rss.xml`, `/fa/rss.xml`.
+Dates: the Persian site shows Jalali (Shamsi) dates and years with Persian
+digits, the English site shows Gregorian dates. Markup (`<time datetime>`,
+RSS, JSON-LD) always stays Gregorian ISO.
+
+Tagline and descriptor ("Notes and knots." plus a one-line description) live in
+`src/i18n.ts`; the descriptor is also the meta description of the home page.
+
+URLs: `/notes/<slug>/`, `/fa/notes/<slug>/`, `/authors/<slug>/`, `/fa/authors/<slug>/`. Feeds: `/rss.xml`, `/fa/rss.xml`.
 Sitemap: `/sitemap-index.xml`. Old `article.html?slug=...&lang=...` links
 redirect to the new URLs.
 

@@ -9,7 +9,7 @@ export interface Props {
   image?: string;
   /** Paths of this page in each language that has it, used for hreflang. */
   alternates?: Partial<Record<Locale, string>>;
-  article?: { published: Date; modified?: Date; tags?: string[]; author: string };
+  article?: { published: Date; modified?: Date; tags?: string[]; author: string; authorUrl?: string };
   noindex?: boolean;
 }
 
@@ -33,7 +33,7 @@ const jsonLd = article
       inLanguage: locale,
       datePublished: article.published.toISOString(),
       dateModified: (article.modified ?? article.published).toISOString(),
-      author: { "@type": "Person", name: article.author },
+      author: { "@type": "Person", name: article.author, url: article.authorUrl },
       publisher: { "@type": "Organization", name: SITE.name },
       mainEntityOfPage: canonical,
       keywords: article.tags?.join(", "),
@@ -53,6 +53,7 @@ const jsonLd = article
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 {article && <meta name="author" content={article.author} />}
+{article?.authorUrl && <link rel="author" href={article.authorUrl} />}
 <link rel="canonical" href={canonical} />
 {noindex && <meta name="robots" content="noindex" />}
 

@@ -7,8 +7,15 @@ export type Note = CollectionEntry<"posts"> & {
   locale: Locale;
   category: string;
   author: string;
+  /** Set when the byline is the site author, so it can link to their page. */
+  authorSlug?: string;
+  teaser: string;
   readingMinutes: number;
 };
+
+function isSiteAuthor(name?: string): boolean {
+  return !name || Object.values(SITE.author).includes(name) || name === SITE.authorSlug;
+}
 
 function withMeta(entry: CollectionEntry<"posts">): Note {
   const [slug, locale] = entry.id.split("/") as [string, Locale];
@@ -19,6 +26,8 @@ function withMeta(entry: CollectionEntry<"posts">): Note {
     locale,
     category: entry.data.category ?? STRINGS[locale].defaultCategory,
     author: entry.data.author ?? SITE.author[locale],
+    authorSlug: isSiteAuthor(entry.data.author) ? SITE.authorSlug : undefined,
+    teaser: entry.data.teaser ?? entry.data.description,
     readingMinutes: Math.max(1, Math.round(words / wpm)),
   });
 }

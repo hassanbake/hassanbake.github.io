@@ -1,16 +1,18 @@
 ---
-import { STRINGS, localePath, type Locale } from "../i18n";
+import { LOCALE_META, STRINGS, formatYear, localePath, type Locale } from "../i18n";
 import { SITE } from "../config";
 
 export interface Props {
   locale: Locale;
   /** Add a "back to all notes" link (article pages). */
   back?: boolean;
+  /** The same page in the other language, when it exists. */
+  switchTo?: { locale: Locale; href: string };
 }
 
-const { locale, back = false } = Astro.props;
+const { locale, back = false, switchTo } = Astro.props;
 const t = STRINGS[locale];
-const year = new Intl.NumberFormat(locale === "fa" ? "fa-IR" : "en-US", { useGrouping: false }).format(new Date().getFullYear());
+const year = formatYear(new Date(), locale);
 ---
 
 <footer class="foot">
@@ -18,6 +20,21 @@ const year = new Intl.NumberFormat(locale === "fa" ? "fa-IR" : "en-US", { useGro
     <p>
       © {year} <span dir="ltr">{SITE.name}</span>. {t.rights}
     </p>
-    {back && <a href={`${localePath(locale)}#notes`}>{t.backToTop} <span aria-hidden="true">↑</span></a>}
+    <p class="foot-links">
+      {back && <a href={`${localePath(locale)}#notes`}>{t.backToTop} <span aria-hidden="true">↑</span></a>}
+      {
+        switchTo && (
+          <a
+            class="foot-lang"
+            href={switchTo.href}
+            hreflang={switchTo.locale}
+            lang={switchTo.locale}
+            dir={switchTo.locale === "en" ? "ltr" : "rtl"}
+          >
+            {LOCALE_META[switchTo.locale].label}
+          </a>
+        )
+      }
+    </p>
   </div>
 </footer>

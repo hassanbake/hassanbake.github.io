@@ -1,6 +1,7 @@
 ---
 title: Hello, world
 description: A template note that shows every supported block. It is a draft, so it never appears on the live site.
+teaser: A template that shows every supported block.
 date: 2026-10-16
 category: Meta
 draft: true

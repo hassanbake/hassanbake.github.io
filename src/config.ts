@@ -4,6 +4,8 @@ export const SITE = {
   // Always lowercase and Latin, also on the Persian site.
   name: "hassanbake",
   defaultImage: "/og-default.png",
+  // Slug of the default author page: /authors/<slug>/ and /fa/authors/<slug>/.
+  authorSlug: "roozbeh-maheronnaghsh",
   // Default byline. A note can override it with `author:` in its front matter.
   author: {
     en: "Roozbeh Maheronnaghsh",
