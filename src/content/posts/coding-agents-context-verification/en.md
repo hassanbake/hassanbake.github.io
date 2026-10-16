@@ -5,7 +5,7 @@ teaser: Manage what the agent can see, and give it a way to check its own work.
 date: 2026-10-16
 category: AI-assisted code
 tags: [ai, coding-agents, software-engineering]
-draft: true
+draft: false
 ---
 
 A coding agent is a program that reads your files, runs commands, edits code and

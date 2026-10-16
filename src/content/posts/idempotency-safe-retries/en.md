@@ -5,7 +5,7 @@ teaser: A timeout tells you nothing about whether the request happened. Idempote
 date: 2026-10-16
 category: System design
 tags: [system-design, distributed-systems, apis]
-draft: true
+draft: false
 ---
 
 A client asks a server to charge a card for 20 dollars. Thirty seconds later the

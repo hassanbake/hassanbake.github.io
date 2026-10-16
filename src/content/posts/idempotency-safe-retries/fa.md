@@ -5,7 +5,7 @@ teaser: timeout نمی‌گوید درخواست انجام شده یا نه. ک
 date: 2026-10-16
 category: طراحی سیستم
 tags: [system-design, distributed-systems, apis]
-draft: true
+draft: false
 ---
 
 کلاینتی از سرور می‌خواهد ۲۰ دلار از یک کارت برداشت کند. سی ثانیه بعد اتصال timeout

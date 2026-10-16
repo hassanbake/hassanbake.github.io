@@ -5,7 +5,7 @@ teaser: چیزی را که ایجنت می‌بیند مدیریت کنید و �
 date: 2026-10-16
 category: کدنویسی با هوش مصنوعی
 tags: [ai, coding-agents, software-engineering]
-draft: true
+draft: false
 ---
 
 ایجنت کدنویسی برنامه‌ای است که فایل‌های شما را می‌خواند، دستور اجرا می‌کند، کد را
