@@ -1191,18 +1191,22 @@ html[lang="fa"] .prose h2::before {
 }
 .prose ol > li {
   counter-increment: item;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  position: relative;
   min-width: 0;
-  overflow-wrap: anywhere;
-  gap: 16px;
+  overflow-wrap: break-word;
   padding: 18px 20px;
+  padding-inline-start: calc(20px + 2.2em + 16px);
   border: 1px solid var(--pgl);
   border-radius: 14px;
   background: #fff;
 }
+/* The number sits beside the item. The item itself stays a normal block, so a tight list
+   (text, bold and code directly inside the item) is not cut into separate grid cells. */
 .prose ol > li::before {
   content: counter(item);
+  position: absolute;
+  inset-inline-start: 20px;
+  inset-block-start: 16px;
   display: grid;
   place-items: center;
   width: 2em;
@@ -1218,11 +1222,11 @@ html[lang="fa"] .prose ol > li::before {
   content: counter(item, persian);
   font-family: var(--f-body);
 }
-.prose ol > li > * {
-  grid-column: 2;
-  margin: 0;
-  min-width: 0;
-  overflow-wrap: anywhere;
+.prose ol > li > :first-child {
+  margin-top: 0;
+}
+.prose ol > li > :last-child {
+  margin-bottom: 0;
 }
 
 /* Callout: <div class="callout"> ... </div> */
