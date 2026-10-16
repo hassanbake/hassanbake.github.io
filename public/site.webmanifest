@@ -1,6 +1,6 @@
 {
-  "name": "hassanbake",
-  "short_name": "hassanbake",
+  "name": "hassanBake",
+  "short_name": "hassanBake",
   "description": "Notes on architecture and AI-assisted code.",
   "start_url": "/",
   "display": "browser",
