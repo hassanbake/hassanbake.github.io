@@ -24,6 +24,7 @@ const year = formatYear(new Date(), locale);
     <p class="foot-links">
       {github && <a href={github} rel="me noopener" dir="ltr">GitHub</a>}
       {linkedin && <a href={linkedin} rel="me noopener" dir="ltr">LinkedIn</a>}
+      <a href={localePath(locale, "/rss.xml")} aria-label={t.followRss} dir="ltr">RSS</a>
       {back && <a href={`${localePath(locale)}#notes`}>{t.backToTop} <span aria-hidden="true">↑</span></a>}
       {
         switchTo && (
