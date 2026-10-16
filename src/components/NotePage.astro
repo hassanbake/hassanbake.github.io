@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import Base from "../layouts/Base.astro";
+import GirihBg from "./GirihBg.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
@@ -48,7 +49,7 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
   <header class="a-head dark">
     <div class="blob b1" aria-hidden="true"></div>
     <div class="blob b2" aria-hidden="true"></div>
-    <div class="grid-overlay" aria-hidden="true"></div>
+    <GirihBg />
     <div class="wrap a-head-in">
       <SiteNav
         locale={locale}
