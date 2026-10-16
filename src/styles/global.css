@@ -1326,6 +1326,10 @@ html[lang="fa"] .eyebrow {
   width: 100%;
   height: 100%;
 }
+.sphere-img[hidden],
+.sphere-canvas[hidden] {
+  display: none;
+}
 .sphere-canvas {
   cursor: grab;
 }
