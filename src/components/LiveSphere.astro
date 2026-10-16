@@ -29,7 +29,7 @@ const alt = piece.alt[locale];
   </div>
   {
     controls && (
-      <div class="sphere-ctrl" role="group" aria-label={t.artPalette} hidden>
+      <div class="sphere-ctrl" role="group" aria-label={t.artPalette} data-live hidden>
         {LIVE_PALETTES.map((p) => (
           <button
             type="button"
@@ -44,7 +44,7 @@ const alt = piece.alt[locale];
       </div>
     )
   }
-  <p class="sphere-hint" hidden>{t.artHint}</p>
+  <p class="sphere-hint" data-live hidden>{t.artHint}</p>
 </div>
 
 <script>
@@ -60,11 +60,12 @@ const alt = piece.alt[locale];
           const canvas = box.querySelector<HTMLCanvasElement>("canvas")!;
           const img = box.querySelector<HTMLImageElement>("img")!;
           const sphere = mountSphere(canvas, data, { palette: box.dataset.palette || "navy" });
+          // Show only what needs JavaScript; the static image goes away once the canvas runs.
+          wrap.querySelectorAll<HTMLElement>("[data-live]").forEach((el) => (el.hidden = false));
           canvas.hidden = false;
           img.hidden = true;
           canvas.setAttribute("role", "img");
           canvas.setAttribute("aria-label", box.dataset.label || "");
-          wrap.querySelectorAll<HTMLElement>("[hidden]").forEach((el) => (el.hidden = false));
           const chips = wrap.querySelectorAll<HTMLButtonElement>("[data-palette-id]");
           chips.forEach((chip) =>
             chip.addEventListener("click", () => {
