@@ -1,0 +1,81 @@
+---
+import { LIVE_PALETTES, type ArtPiece } from "../art";
+import { STRINGS, type Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+  piece: ArtPiece;
+  /** Show the palette switcher (needs JavaScript, hidden until the canvas is running). */
+  controls?: boolean;
+}
+
+const { locale, piece, controls = false } = Astro.props;
+const t = STRINGS[locale];
+const alt = piece.alt[locale];
+---
+
+<div class="sphere-wrap" data-sphere-wrap style={`--ground:${piece.background}`}>
+  <div class="sphere" data-sphere data-palette={piece.palette?.id} data-label={alt}>
+    <!-- Static image: what you see without JavaScript, and until the canvas is ready. -->
+    <img
+      class="sphere-img"
+      src={piece.image.small.file}
+      width={piece.image.small.width}
+      height={piece.image.small.height}
+      alt={alt}
+      decoding="async"
+    />
+    <canvas class="sphere-canvas" width="1000" height="1000" hidden></canvas>
+  </div>
+  {
+    controls && (
+      <div class="sphere-ctrl" role="group" aria-label={t.artPalette} hidden>
+        {LIVE_PALETTES.map((p) => (
+          <button
+            type="button"
+            class="chip"
+            data-palette-id={p.id}
+            aria-pressed={p.id === piece.palette?.id ? "true" : "false"}
+          >
+            <span class="sw" style={`--a:${p.base};--b:${p.accent}`} aria-hidden="true" />
+            {p.name[locale]}
+          </button>
+        ))}
+      </div>
+    )
+  }
+  <p class="sphere-hint" hidden>{t.artHint}</p>
+</div>
+
+<script>
+  import { mountSphere } from "../scripts/sphere-canvas.js";
+
+  const wraps = document.querySelectorAll<HTMLElement>("[data-sphere-wrap]");
+  if (wraps.length) {
+    fetch("/art/sphere-data.json")
+      .then((r) => r.json())
+      .then((data) => {
+        wraps.forEach((wrap) => {
+          const box = wrap.querySelector<HTMLElement>("[data-sphere]")!;
+          const canvas = box.querySelector<HTMLCanvasElement>("canvas")!;
+          const img = box.querySelector<HTMLImageElement>("img")!;
+          const sphere = mountSphere(canvas, data, { palette: box.dataset.palette || "navy" });
+          canvas.hidden = false;
+          img.hidden = true;
+          canvas.setAttribute("role", "img");
+          canvas.setAttribute("aria-label", box.dataset.label || "");
+          wrap.querySelectorAll<HTMLElement>("[hidden]").forEach((el) => (el.hidden = false));
+          const chips = wrap.querySelectorAll<HTMLButtonElement>("[data-palette-id]");
+          chips.forEach((chip) =>
+            chip.addEventListener("click", () => {
+              sphere.setPalette(chip.dataset.paletteId!);
+              chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+            }),
+          );
+        });
+      })
+      .catch(() => {
+        // Keep the static image.
+      });
+  }
+</script>

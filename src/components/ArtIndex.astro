@@ -1,0 +1,78 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import Footer from "../components/Footer.astro";
+import LiveSphere from "../components/LiveSphere.astro";
+import { ART_CREDIT, ART_SERIES, FEATURED_PIECE, MADE_WITH, artPath } from "../art";
+import { STRINGS, type Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const other: Locale = locale === "en" ? "fa" : "en";
+const t = STRINGS[locale];
+const switchTo = { locale: other, href: artPath(other) };
+---
+
+<Base
+  locale={locale}
+  title={t.artTitle}
+  description={t.artLead}
+  image={FEATURED_PIECE.image.full.file}
+  alternates={{ en: artPath("en"), fa: artPath("fa") }}
+>
+  <header class="a-head dark">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="wrap a-head-in">
+      <SiteNav locale={locale} variant="art" switchTo={switchTo} />
+      <div class="a-head-body art-hero">
+        <div class="art-hero-text">
+          <h1 class="a-title rise-in" style="--d:0ms">{t.artTitle}</h1>
+          <p class="a-stand rise-in" style="--d:120ms">{t.artLead}</p>
+          <p class="art-credit rise-in" style="--d:240ms">{MADE_WITH[locale]} · {ART_CREDIT[locale]}</p>
+        </div>
+        <div class="art-hero-visual rise-in" style="--d:200ms">
+          <LiveSphere locale={locale} piece={FEATURED_PIECE} controls />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="sect art-index">
+    <div class="wrap">
+      {
+        ART_SERIES.map((series) => (
+          <section class="art-series" aria-labelledby={`series-${series.id}`}>
+            <h2 id={`series-${series.id}`} class="art-series-title">{series.title[locale]}</h2>
+            <ul class="art-grid">
+              {series.pieces.map((piece) => (
+                <li class="rv">
+                  <a class="art-card" href={artPath(locale, piece.id)}>
+                    <span class="art-thumb" style={`--ground:${piece.background}`}>
+                      <img
+                        src={piece.image.small.file}
+                        width={piece.image.small.width}
+                        height={piece.image.small.height}
+                        alt={piece.alt[locale]}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
+                    <span class="art-card-title">{piece.title[locale]}</span>
+                    <span class="art-card-sub">{piece.palette ? piece.palette.name[locale] : piece.summary[locale]}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+
+  <Footer locale={locale} switchTo={switchTo} />
+</Base>

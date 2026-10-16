@@ -1,11 +1,12 @@
 ---
 import { LOCALE_META, STRINGS, localePath, type Locale } from "../i18n";
+import { artPath } from "../art";
 import Wordmark from "./Wordmark.astro";
 
 export interface Props {
   locale: Locale;
-  /** "home" shows Notes / Hello, "article" shows a back link. */
-  variant: "home" | "article";
+  /** "home" shows Notes / Art / Hello, "article" shows a back link, "art" shows Notes / Art. */
+  variant: "home" | "article" | "art";
   /** The same page in the other language, when it exists. */
   switchTo?: { locale: Locale; href: string };
 }
@@ -24,7 +25,13 @@ const home = localePath(locale);
       variant === "home" ? (
         <>
           <a href="#notes">{t.navNotes}</a>
+          <a href={artPath(locale)}>{t.navArt}</a>
           <a href="#hello">{t.navHello}</a>
+        </>
+      ) : variant === "art" ? (
+        <>
+          <a href={`${home}#notes`}>{t.navNotes}</a>
+          <a href={artPath(locale)} aria-current="page">{t.navArt}</a>
         </>
       ) : (
         <a href={`${home}#notes`}>
