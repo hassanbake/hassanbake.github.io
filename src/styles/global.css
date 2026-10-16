@@ -1,6 +1,27 @@
 /* hassanbake: "Blend Navy". Navy frame, ivory reading surface. */
 
 /* ---------- Tokens ---------- */
+/* Fallback faces sized to the web fonts, so the swap to Source Sans 3 and Bricolage Grotesque
+   does not reflow the page (long articles used to shift by 0.1 CLS). Ratios measured against Arial. */
+@font-face {
+  font-family: "Source Sans Fallback";
+  src: local("Arial"), local("Helvetica"), local("Liberation Sans");
+  font-weight: 400 500;
+  size-adjust: 92.9%;
+}
+@font-face {
+  font-family: "Source Sans Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Liberation Sans Bold");
+  font-weight: 600 800;
+  size-adjust: 88.7%;
+}
+@font-face {
+  font-family: "Bricolage Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Liberation Sans Bold");
+  font-weight: 500 900;
+  size-adjust: 102%;
+}
+
 :root,
 .dark,
 .feat {
@@ -34,8 +55,8 @@
   --callbg: #e8eefb;
   --callbd: #bfcdf0;
 
-  --f-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif;
-  --f-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-display: "Bricolage Grotesque Variable", "Bricolage Fallback", "Bricolage Grotesque", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Source Sans Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ls-head: -0.03em;
   --dir: 1;
@@ -63,7 +84,7 @@ html[dir="rtl"] {
   --tx: #14213d;
   --tx2: #3a4560;
   --tx3: #5b6580;
-  --tx4: #8a93a8;
+  --tx4: #5b6580;
   --ac: #1e3a8a;
   --ac2: #b8860b;
   --focus: #1e3a8a;
@@ -296,35 +317,11 @@ html[dir="rtl"] .wl.bake {
   mask-image: var(--girih-fade);
   filter: blur(1.4px);
 }
-.hero-girih-layer svg {
+.hero-girih {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-}
-.hero-girih path {
-  stroke: var(--ac);
-  stroke-width: 1.5;
-  stroke-opacity: 0.7;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: girih-draw 2.1s cubic-bezier(0.4, 0, 0.2, 1) both;
-  animation-delay: calc(var(--d) + 300ms);
-}
-@keyframes girih-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-.hero-girih.is-static path {
-  animation: none;
-  stroke-dashoffset: 0;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-girih path {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
 }
 html[dir="rtl"] .hero-girih-layer {
   --girih-fade: linear-gradient(270deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.4) 50%, #000 100%);
@@ -1422,9 +1419,8 @@ html[lang="fa"] .eyebrow {
   gap: 8px;
   margin-top: 16px;
 }
-.sphere-ctrl[hidden],
-.sphere-hint[hidden] {
-  display: none;
+.sphere-wrap:not([data-ready]) [data-live] {
+  visibility: hidden;
 }
 .sphere-ctrl .chip {
   display: inline-flex;
