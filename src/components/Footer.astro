@@ -4,14 +4,12 @@ import { SITE } from "../config";
 
 export interface Props {
   locale: Locale;
-  /** Add a "back to all notes" link (article pages). */
-  back?: boolean;
   /** The same page in the other language, when it exists. */
   switchTo?: { locale: Locale; href: string };
 }
 
 const { email, github, linkedin } = SITE.contact;
-const { locale, back = false, switchTo } = Astro.props;
+const { locale, switchTo } = Astro.props;
 const t = STRINGS[locale];
 const year = formatYear(new Date(), locale);
 ---
@@ -19,14 +17,13 @@ const year = formatYear(new Date(), locale);
 <footer class="foot">
   <div class="wrap foot-in">
     <p>
-      © {year} <span dir="ltr">{SITE.name}</span>. {t.rights}
+      © {year} <span dir="ltr">{SITE.name}</span>
     </p>
     <p class="foot-links">
       {email && <a href={`mailto:${email}`} dir="ltr">{email}</a>}
       {github && <a href={github} rel="me noopener" dir="ltr">GitHub</a>}
       {linkedin && <a href={linkedin} rel="me noopener" dir="ltr">LinkedIn</a>}
       <a href={localePath(locale, "/rss.xml")} aria-label={t.followRss} dir="ltr">RSS</a>
-      {back && <a href={`${localePath(locale)}#notes`}>{t.backToTop} <span aria-hidden="true">↑</span></a>}
       {
         switchTo && (
           <a

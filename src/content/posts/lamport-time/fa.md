@@ -385,6 +385,10 @@ TrueTime در Google Spanner همین نامساوی است که مهندسی ش
 
 ## منبع
 
+<div class="en-block" dir="ltr">
+
 Leslie Lamport. "Time, Clocks, and the Ordering of Events in a Distributed
 System." *Communications of the ACM* 21, no. 7 (July 1978): 558–565.
 [doi:10.1145/359545.359563](https://doi.org/10.1145/359545.359563)
+
+</div>
