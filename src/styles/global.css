@@ -56,6 +56,7 @@
   --callbd: #bfcdf0;
 
   --f-display: "Bricolage Grotesque Variable", "Bricolage Fallback", "Bricolage Grotesque", system-ui, sans-serif;
+  --f-brand: "Bricolage Grotesque Variable", "Bricolage Fallback", "Bricolage Grotesque", system-ui, sans-serif;
   --f-body: "Source Sans 3", "Source Sans Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --ls-head: -0.03em;
@@ -193,7 +194,8 @@ img {
 
 /* ---------- Wordmark ---------- */
 .wordmark {
-  font-family: var(--f-display);
+  /* The logotype is Latin and identical in both languages. */
+  font-family: var(--f-brand);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1;

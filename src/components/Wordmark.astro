@@ -15,12 +15,12 @@ const Tag = heading ? "h1" : "span";
 
 {
   big ? (
-    <Tag class="wordmark wordmark-big" dir="ltr" aria-label="hassanbake">
+    <Tag class="wordmark wordmark-big" dir="ltr" lang="en" aria-label="hassanbake">
       {letters.map(({ ch, i, bake }) => (
         <span class:list={["wl", { bake }]} style={`--i:${i}`} aria-hidden="true">{ch}</span>
       ))}
     </Tag>
   ) : (
-    <span class="wordmark" dir="ltr">hassan<span class="bake-text">bake</span></span>
+    <span class="wordmark" dir="ltr" lang="en">hassan<span class="bake-text">bake</span></span>
   )
 }
