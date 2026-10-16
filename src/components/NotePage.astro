@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
+import { ogPath } from "../og/paths";
 import { STRINGS, authorPath, formatDate, formatNumber, notePath, type Locale } from "../i18n";
 import type { Note } from "../posts";
 
@@ -32,7 +33,7 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
   locale={locale}
   title={data.title}
   description={data.description}
-  image={data.image}
+  image={data.image ?? ogPath.note(locale, slug)}
   alternates={alternates}
   article={{
     published: data.date,
