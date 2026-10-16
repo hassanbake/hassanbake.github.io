@@ -34,7 +34,7 @@ category: Machine learning     # chip + home filter; defaults to "Notes" / «ی�
 author: Name Surname           # optional byline, defaults to the site author in src/config.ts
                                # (the default author links to /authors/<slug>/, other names do not)
 tags: [optimization]
-image: /my-cover.png           # optional link preview, under public/; defaults to /og-default.png
+image: /my-cover.png           # optional link preview, under public/; by default one is generated (see "Share images")
 draft: false                   # drafts show only in `npm run dev`
 ---
 ```
@@ -105,3 +105,7 @@ One-time setup: repository **Settings > Pages > Source: GitHub Actions**.
 
 Every canonical URL, sitemap, RSS and link-preview URL derives from `SITE_URL`,
 and all internal links are relative, so nothing else changes.
+
+## Share images
+
+Every note, art piece and the site itself gets a 1200×630 Open Graph image, generated at build time by `src/pages/og/[...path].png.ts` (card layout in `src/og/card.ts`, list of cards in `src/og.ts`). It uses the Blend Navy colours, the hero girih pattern, the title, the author name and the hassanbake mark, mirrored for Persian; art pieces also show the artwork. Setting `image:` in a note's front matter overrides it.
