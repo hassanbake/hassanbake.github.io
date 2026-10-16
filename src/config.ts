@@ -11,7 +11,7 @@ export const SITE = {
   } satisfies Record<Locale, string>,
   // Contact chips in the "Say hello" band. Leave a value empty to hide it.
   contact: {
-    email: "",
+    email: "roozbeh@hassanbake.com",
     github: "https://github.com/hassanbake",
     linkedin: "",
   },

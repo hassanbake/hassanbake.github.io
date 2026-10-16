@@ -4,7 +4,6 @@ description: Notes on Lamport's 1978 paper. Why wall clocks can't order events a
 date: 2026-10-16
 category: System design
 tags: [system-design, distributed-systems]
-author: Hassan
 draft: false
 ---
 

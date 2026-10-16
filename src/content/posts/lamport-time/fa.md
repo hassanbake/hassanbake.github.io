@@ -4,7 +4,6 @@ description: یادداشت‌هایی درباره‌ی مقاله‌ی ۱۹۷�
 date: 2026-10-16
 category: طراحی سیستم
 tags: [system-design, distributed-systems]
-author: Hassan
 draft: false
 ---
 

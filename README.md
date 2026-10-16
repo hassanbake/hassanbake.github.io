@@ -66,7 +66,7 @@ Vazirmatn (OFL). To add IRANYekan, put the licensed `.woff2` files in
 whose license has not been confirmed.
 
 Contact chips in the "Say hello" band come from `SITE.contact` in `src/config.ts`;
-empty values are hidden (the email is not set yet).
+empty values are hidden.
 
 ## Deploy
 
