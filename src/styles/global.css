@@ -1286,6 +1286,299 @@ html[lang="fa"] .card-title {
   color: var(--pgm);
 }
 
+/* ---------- Art ---------- */
+.eyebrow {
+  margin: 0 0 clamp(12px, 2vw, 20px);
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ac2);
+}
+html[lang="fa"] .eyebrow {
+  font-family: var(--f-body);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.95rem;
+}
+.art-credit {
+  margin: clamp(16px, 2vw, 28px) 0 0;
+  font-size: 0.9rem;
+  color: var(--tx3);
+}
+
+/* Live sphere (home band, gallery header) */
+.sphere-wrap {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+}
+.sphere {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--line2);
+  border-radius: 24px;
+  background: var(--ground, #040b1a);
+}
+.sphere-img,
+.sphere-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sphere-canvas {
+  cursor: grab;
+}
+.sphere-canvas:active {
+  cursor: grabbing;
+}
+.sphere-canvas:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -4px;
+}
+.sphere-ctrl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.sphere-ctrl[hidden],
+.sphere-hint[hidden] {
+  display: none;
+}
+.sphere-ctrl .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 14px;
+  font-size: 0.9rem;
+}
+.sphere-ctrl .chip[aria-pressed="true"] {
+  background: var(--ac2);
+  border-color: var(--ac2);
+  color: var(--bg);
+}
+.sw {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--a) 50%, var(--b) 50%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+.sphere-hint {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--tx3);
+}
+
+/* Home band */
+.art-band {
+  background: var(--bg2);
+  border-block: 1px solid var(--line);
+  padding-block: clamp(56px, 9vw, 120px);
+}
+.art-band-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
+}
+.art-band h2 {
+  margin: 0;
+  max-width: 14ch;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(30px, 1.2rem + 2.6vw, 52px);
+  line-height: 1.05;
+  letter-spacing: var(--ls-head);
+}
+html[lang="fa"] .art-band h2 {
+  max-width: 18ch;
+  line-height: 1.4;
+}
+.art-band-body {
+  max-width: 40ch;
+  margin: clamp(16px, 2.5vw, 28px) 0 clamp(20px, 3vw, 32px);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--tx2);
+}
+.art-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--line3);
+  border-radius: 999px;
+  color: var(--tx);
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.art-more:hover {
+  background: var(--ac);
+  border-color: var(--ac);
+  color: var(--bg);
+}
+
+/* Gallery */
+.art-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.art-hero .a-stand {
+  max-width: 38ch;
+}
+.sect .art-series-title {
+  font-size: clamp(24px, 1.1rem + 1.2vw, 34px);
+}
+.art-series + .art-series {
+  margin-top: clamp(48px, 7vw, 96px);
+}
+.art-grid {
+  list-style: none;
+  margin: clamp(20px, 3vw, 32px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: clamp(16px, 2.5vw, 28px);
+  align-items: start;
+}
+.art-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--tx);
+  text-decoration: none;
+}
+.art-thumb {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--ground);
+}
+.art-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s var(--ease);
+}
+.art-card:hover .art-thumb img {
+  transform: scale(1.04);
+}
+.art-card-title {
+  margin-top: 8px;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+html[lang="fa"] .art-card-title {
+  font-weight: 700;
+  line-height: 1.6;
+}
+.art-card:hover .art-card-title {
+  color: var(--ac2);
+}
+.art-card-sub {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--tx3);
+}
+
+/* One piece */
+.piece-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: start;
+}
+.piece-figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line2);
+  border-radius: 20px;
+  background: var(--ground);
+}
+.piece-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.piece-title {
+  font-size: clamp(26px, 1.1rem + 1.6vw, 40px);
+}
+.badge {
+  text-decoration: none;
+}
+.piece-facts {
+  display: grid;
+  gap: 12px;
+  margin: clamp(20px, 3vw, 32px) 0 0;
+}
+.piece-facts div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.piece-facts dt {
+  min-width: 8ch;
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tx3);
+}
+html[lang="fa"] .piece-facts dt {
+  font-family: var(--f-body);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.9rem;
+}
+.piece-facts dd {
+  margin: 0;
+  color: var(--tx);
+}
+.piece-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: clamp(28px, 4vw, 48px);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+.piece-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--tx2);
+  text-decoration: none;
+}
+.piece-nav a:hover {
+  color: var(--ac2);
+}
+
+@media (max-width: 900px) {
+  .art-band-in,
+  .art-hero,
+  .piece-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .art-band-visual {
+    order: -1;
+  }
+}
+
 /* ---------- 404 ---------- */
 .nf {
   display: grid;

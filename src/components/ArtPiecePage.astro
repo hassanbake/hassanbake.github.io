@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteNav from "../components/SiteNav.astro";
+import Footer from "../components/Footer.astro";
+import { ART_CREDIT, ART_PIECES, ART_SERIES, MADE_WITH, artPath, type ArtPiece } from "../art";
+import { STRINGS, formatNumber, type Locale } from "../i18n";
+
+export interface Props {
+  locale: Locale;
+  piece: ArtPiece;
+}
+
+const { locale, piece } = Astro.props;
+const other: Locale = locale === "en" ? "fa" : "en";
+const t = STRINGS[locale];
+const index = ART_PIECES.findIndex((p) => p.id === piece.id);
+const prev = ART_PIECES[index - 1];
+const next = ART_PIECES[index + 1];
+const series = ART_SERIES.find((s) => s.id === piece.series)!;
+const switchTo = { locale: other, href: artPath(other, piece.id) };
+const arrow = locale === "fa" ? { prev: "→", next: "←" } : { prev: "←", next: "→" };
+---
+
+<Base
+  locale={locale}
+  title={piece.title[locale]}
+  description={piece.summary[locale]}
+  image={piece.image.full.file}
+  alternates={{ en: artPath("en", piece.id), fa: artPath("fa", piece.id) }}
+>
+  <header class="a-head dark piece">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="wrap a-head-in">
+      <SiteNav locale={locale} variant="art" switchTo={switchTo} />
+      <div class="a-head-body piece-grid">
+        <figure class="piece-figure rise-in" style={`--ground:${piece.background}`}>
+          <a href={piece.image.full.file} aria-label={t.artFullSize}>
+            <img
+              src={piece.image.full.file}
+              srcset={`${piece.image.small.file} ${piece.image.small.width}w, ${piece.image.full.file} ${piece.image.full.width}w`}
+              sizes="(max-width: 900px) 92vw, 640px"
+              width={piece.image.full.width}
+              height={piece.image.full.height}
+              alt={piece.alt[locale]}
+              decoding="async"
+            />
+          </a>
+        </figure>
+        <div class="piece-text">
+          <p class="a-meta rise-in" style="--d:0ms">
+            <a class="badge" href={`${artPath(locale)}#series-${series.id}`}>{series.title[locale]}</a>
+            <span class="meta-text">{formatNumber(piece.year, locale).replace(/[,٬]/g, "")}</span>
+          </p>
+          <h1 class="a-title piece-title rise-in" style="--d:120ms">{piece.title[locale]}</h1>
+          <p class="a-stand rise-in" style="--d:240ms">{piece.summary[locale]}</p>
+          <dl class="piece-facts rise-in" style="--d:320ms">
+            {
+              piece.palette && (
+                <div>
+                  <dt>{t.artPaletteLabel}</dt>
+                  <dd>{piece.palette.name[locale]}</dd>
+                </div>
+              )
+            }
+            <div>
+              <dt>{t.artSeries}</dt>
+              <dd>{series.title[locale]}</dd>
+            </div>
+          </dl>
+          <p class="art-credit rise-in" style="--d:400ms">{MADE_WITH[locale]} · {ART_CREDIT[locale]}</p>
+          <nav class="piece-nav rise-in" style="--d:480ms" aria-label={t.artTitle}>
+            {
+              prev ? (
+                <a href={artPath(locale, prev.id)} rel="prev">
+                  <span aria-hidden="true">{arrow.prev}</span> {t.artPrev}: {prev.title[locale]}
+                </a>
+              ) : <span />
+            }
+            <a href={artPath(locale)}>{t.artBack}</a>
+            {
+              next ? (
+                <a href={artPath(locale, next.id)} rel="next">
+                  {t.artNext}: {next.title[locale]} <span aria-hidden="true">{arrow.next}</span>
+                </a>
+              ) : <span />
+            }
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <Footer locale={locale} switchTo={switchTo} />
+</Base>

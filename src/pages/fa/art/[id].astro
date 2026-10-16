@@ -1,0 +1,9 @@
+---
+import ArtPiecePage from "../../../components/ArtPiecePage.astro";
+import { ART_PIECES } from "../../../art";
+
+export const getStaticPaths = () =>
+  ART_PIECES.map((piece) => ({ params: { id: piece.id }, props: { locale: "fa" as const, piece } }));
+---
+
+<ArtPiecePage {...Astro.props} />

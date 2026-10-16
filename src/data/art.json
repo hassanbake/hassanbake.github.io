@@ -1,0 +1,559 @@
+{
+ "version": 1,
+ "generated": "2026-10-16",
+ "credit": {
+  "en": "Roozbeh Maheronnaghsh",
+  "fa": "روزبه ماهرالنقش"
+ },
+ "madeWith": {
+  "en": "Made with Python.",
+  "fa": "ساخته‌شده با Python."
+ },
+ "series": [
+  {
+   "id": "spheres",
+   "title": {
+    "en": "Spheres",
+    "fa": "گوی‌ها"
+   }
+  },
+  {
+   "id": "surfaces",
+   "title": {
+    "en": "Surfaces",
+    "fa": "سطح‌ها"
+   }
+  },
+  {
+   "id": "construction",
+   "title": {
+    "en": "Construction",
+    "fa": "ساخت"
+   }
+  }
+ ],
+ "pieces": [
+  {
+   "id": "sphere-navy",
+   "order": 1,
+   "series": "spheres",
+   "featured": true,
+   "live": true,
+   "year": 2026,
+   "title": {
+    "en": "Sphere in navy and gold",
+    "fa": "گوی، سرمه‌ای و زر"
+   },
+   "summary": {
+    "en": "The “shesh-tond zamineh-deh” knotwork wrapped on a sphere and lit from one side.",
+    "fa": "نقش گره‌چینی «شش‌تند زمینه‌ده» که روی گوی پیچیده و از یک سو روشن شده است."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "A sphere covered in an Iranian geometric star pattern, lit from the upper left. Pale blue cells darken to navy toward the lower right, and the stars are gold.",
+    "fa": "گویی پوشیده از نقش ستاره‌ای گره‌چینی ایرانی که از بالا و چپ روشن شده است. سلول‌ها از آبی روشن تا سرمه‌ای تیره در پایین و راست سایه می‌خورند و ستاره‌ها زرین‌اند."
+   },
+   "palette": {
+    "id": "navy",
+    "name": {
+     "en": "Navy and gold",
+     "fa": "سرمه‌ای و زر"
+    }
+   },
+   "background": "#040b1a",
+   "image": {
+    "full": {
+     "file": "/art/img/sphere-navy.webp",
+     "width": 1502,
+     "height": 1502
+    },
+    "small": {
+     "file": "/art/img/sphere-navy-small.webp",
+     "width": 800,
+     "height": 800
+    }
+   }
+  },
+  {
+   "id": "sphere-navy-echo",
+   "order": 2,
+   "series": "spheres",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Sphere in navy and gold, echoed",
+    "fa": "گوی، سرمه‌ای و زر، پژواک"
+   },
+   "summary": {
+    "en": "The same sphere with every star repeated as nested rings.",
+    "fa": "همان گوی، با ستاره‌هایی که به حلقه‌های تودرتو تکرار شده‌اند."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The navy and gold sphere again, but each star is repeated as nested rings that get lighter toward the center.",
+    "fa": "دوباره گوی سرمه‌ای و زر، ولی هر ستاره به حلقه‌های تودرتو شکسته شده که به‌سمت مرکز روشن‌تر می‌شوند."
+   },
+   "palette": {
+    "id": "navy",
+    "name": {
+     "en": "Navy and gold",
+     "fa": "سرمه‌ای و زر"
+    }
+   },
+   "background": "#040b1a",
+   "image": {
+    "full": {
+     "file": "/art/img/sphere-navy-echo.webp",
+     "width": 1502,
+     "height": 1502
+    },
+    "small": {
+     "file": "/art/img/sphere-navy-echo-small.webp",
+     "width": 800,
+     "height": 800
+    }
+   }
+  },
+  {
+   "id": "sphere-clay",
+   "order": 3,
+   "series": "spheres",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Sphere in clay",
+    "fa": "گوی، گل و آجر"
+   },
+   "summary": {
+    "en": "Terracotta and sand cells with pale turquoise stars on a dark brown ground.",
+    "fa": "سلول‌های آجری و ماسه‌ای با ستاره‌های فیروزه‌ای کم‌رنگ روی زمینه‌ی قهوه‌ای تیره."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "A sphere of the same star pattern in terracotta and sand, lit from the upper left, with pale turquoise stars on a dark brown ground.",
+    "fa": "گویی با همان نقش ستاره‌ای در رنگ‌های آجری و ماسه‌ای، روشن‌شده از بالا و چپ، با ستاره‌های فیروزه‌ای کم‌رنگ روی زمینه‌ی قهوه‌ای تیره."
+   },
+   "palette": {
+    "id": "gel",
+    "name": {
+     "en": "Clay and turquoise",
+     "fa": "گِل و آجر"
+    }
+   },
+   "background": "#160906",
+   "image": {
+    "full": {
+     "file": "/art/img/sphere-clay.webp",
+     "width": 1502,
+     "height": 1502
+    },
+    "small": {
+     "file": "/art/img/sphere-clay-small.webp",
+     "width": 800,
+     "height": 800
+    }
+   }
+  },
+  {
+   "id": "sphere-clay-echo",
+   "order": 4,
+   "series": "spheres",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Sphere in clay, echoed",
+    "fa": "گوی، گل و آجر، پژواک"
+   },
+   "summary": {
+    "en": "Clay sphere with nested rings inside each star.",
+    "fa": "گوی گل و آجر با حلقه‌های تودرتو درون هر ستاره."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The clay-colored sphere with each turquoise star drawn as nested rings that lighten toward the center.",
+    "fa": "گوی گل و آجر که هر ستاره‌ی فیروزه‌ای‌اش به حلقه‌های تودرتو شکسته شده و به‌سمت مرکز روشن‌تر می‌شود."
+   },
+   "palette": {
+    "id": "gel",
+    "name": {
+     "en": "Clay and turquoise",
+     "fa": "گِل و آجر"
+    }
+   },
+   "background": "#160906",
+   "image": {
+    "full": {
+     "file": "/art/img/sphere-clay-echo.webp",
+     "width": 1502,
+     "height": 1502
+    },
+    "small": {
+     "file": "/art/img/sphere-clay-echo-small.webp",
+     "width": 800,
+     "height": 800
+    }
+   }
+  },
+  {
+   "id": "sphere-lapis",
+   "order": 5,
+   "series": "spheres",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Sphere in lapis",
+    "fa": "گوی، لاجورد"
+   },
+   "summary": {
+    "en": "Turquoise and lapis cells with gold stars on a deep indigo ground, like glazed tile.",
+    "fa": "سلول‌های فیروزه‌ای و لاجوردی با ستاره‌های زرین روی زمینه‌ی نیلی، مثل کاشی لعابی."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "A sphere of the star pattern in turquoise and lapis blue with gold stars on a deep indigo ground, lit from the upper left.",
+    "fa": "گویی با نقش ستاره‌ای در فیروزه‌ای و لاجوردی، با ستاره‌های زرین روی زمینه‌ی نیلی تیره، روشن‌شده از بالا و چپ."
+   },
+   "palette": {
+    "id": "lajvard",
+    "name": {
+     "en": "Lapis and turquoise with gold",
+     "fa": "لاجورد و فیروزه با زر"
+    }
+   },
+   "background": "#030713",
+   "image": {
+    "full": {
+     "file": "/art/img/sphere-lapis.webp",
+     "width": 1502,
+     "height": 1502
+    },
+    "small": {
+     "file": "/art/img/sphere-lapis-small.webp",
+     "width": 800,
+     "height": 800
+    }
+   }
+  },
+  {
+   "id": "sphere-slate",
+   "order": 6,
+   "series": "spheres",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Sphere in slate and vermilion",
+    "fa": "گوی، آبی‌خاکستری و قرمز"
+   },
+   "summary": {
+    "en": "A quiet palette: slate blue cells and one vermilion accent on an ivory ground.",
+    "fa": "پالتی آرام: سلول‌های آبی‌خاکستری و یک رنگ تأکیدی قرمز روی زمینه‌ی عاجی."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "A sphere of the star pattern in slate blue with vermilion stars on an ivory ground, lit from the upper left.",
+    "fa": "گویی با نقش ستاره‌ای در آبی‌خاکستری، با ستاره‌های قرمز روی زمینه‌ی عاجی، روشن‌شده از بالا و چپ."
+   },
+   "palette": {
+    "id": "mini",
+    "name": {
+     "en": "Slate and vermilion",
+     "fa": "آبی‌خاکستری و قرمز"
+    }
+   },
+   "background": "#f4f2ea",
+   "image": {
+    "full": {
+     "file": "/art/img/sphere-slate.webp",
+     "width": 1502,
+     "height": 1502
+    },
+    "small": {
+     "file": "/art/img/sphere-slate-small.webp",
+     "width": 800,
+     "height": 800
+    }
+   }
+  },
+  {
+   "id": "whirl-navy",
+   "order": 7,
+   "series": "surfaces",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Whirl, navy and gold",
+    "fa": "گرداب، سرمه‌ای و زر"
+   },
+   "summary": {
+    "en": "The pattern pulled into a twisting funnel.",
+    "fa": "نقش در قیفی پیچان کشیده شده است."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The star pattern pulled into a twisting funnel. Cells shrink and spiral toward a dark throat at the upper left; blues and gold.",
+    "fa": "نقش ستاره‌ای در قیفی پیچان کشیده شده است. سلول‌ها به‌سمت گلوگاهی تیره در بالا و چپ کوچک می‌شوند و می‌چرخند؛ آبی و زر."
+   },
+   "palette": {
+    "id": "navy",
+    "name": {
+     "en": "Navy and gold",
+     "fa": "سرمه‌ای و زر"
+    }
+   },
+   "background": "#040b1a",
+   "image": {
+    "full": {
+     "file": "/art/img/whirl-navy.webp",
+     "width": 1208,
+     "height": 1367
+    },
+    "small": {
+     "file": "/art/img/whirl-navy-small.webp",
+     "width": 640,
+     "height": 724
+    }
+   }
+  },
+  {
+   "id": "whirl-clay",
+   "order": 8,
+   "series": "surfaces",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Whirl, clay",
+    "fa": "گرداب، گل و آجر"
+   },
+   "summary": {
+    "en": "The same funnel in terracotta and turquoise.",
+    "fa": "همان قیف در آجری و فیروزه‌ای."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The twisting funnel again in terracotta and sand with turquoise stars.",
+    "fa": "دوباره قیف پیچان، این بار در آجری و ماسه‌ای با ستاره‌های فیروزه‌ای."
+   },
+   "palette": {
+    "id": "gel",
+    "name": {
+     "en": "Clay and turquoise",
+     "fa": "گِل و آجر"
+    }
+   },
+   "background": "#160906",
+   "image": {
+    "full": {
+     "file": "/art/img/whirl-clay.webp",
+     "width": 1208,
+     "height": 1367
+    },
+    "small": {
+     "file": "/art/img/whirl-clay-small.webp",
+     "width": 640,
+     "height": 724
+    }
+   }
+  },
+  {
+   "id": "pleats-navy",
+   "order": 9,
+   "series": "surfaces",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Pleats",
+    "fa": "چین"
+   },
+   "summary": {
+    "en": "The pattern folded like paper, with light and dark facets.",
+    "fa": "نقش مثل کاغذ تاشده، با وجه‌های روشن و تیره."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The star pattern folded like paper into narrow vertical pleats; neighboring facets alternate between light and dark blue with gold.",
+    "fa": "نقش ستاره‌ای مثل کاغذ در چین‌های عمودی باریک تا شده است؛ وجه‌های کنار هم یکی در میان آبی روشن و تیره‌اند، همراه با زر."
+   },
+   "palette": {
+    "id": "navy",
+    "name": {
+     "en": "Navy and gold",
+     "fa": "سرمه‌ای و زر"
+    }
+   },
+   "background": "#040b1a",
+   "image": {
+    "full": {
+     "file": "/art/img/pleats-navy.webp",
+     "width": 1208,
+     "height": 1367
+    },
+    "small": {
+     "file": "/art/img/pleats-navy-small.webp",
+     "width": 640,
+     "height": 724
+    }
+   }
+  },
+  {
+   "id": "wave-navy",
+   "order": 10,
+   "series": "surfaces",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Wave",
+    "fa": "موج"
+   },
+   "summary": {
+    "en": "The pattern over a gentle two-way swell.",
+    "fa": "نقش روی موجی ملایم در دو جهت."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The star pattern over a gentle two-directional wave. Cells bunch together and spread apart with the swell, shaded from pale to dark blue with gold stars.",
+    "fa": "نقش ستاره‌ای روی موجی ملایم در دو جهت. سلول‌ها با برآمدگی‌ها جمع و باز می‌شوند و از آبی روشن تا تیره سایه می‌خورند، با ستاره‌های زرین."
+   },
+   "palette": {
+    "id": "navy",
+    "name": {
+     "en": "Navy and gold",
+     "fa": "سرمه‌ای و زر"
+    }
+   },
+   "background": "#040b1a",
+   "image": {
+    "full": {
+     "file": "/art/img/wave-navy.webp",
+     "width": 1208,
+     "height": 1367
+    },
+    "small": {
+     "file": "/art/img/wave-navy-small.webp",
+     "width": 640,
+     "height": 724
+    }
+   }
+  },
+  {
+   "id": "flutes-clay",
+   "order": 11,
+   "series": "surfaces",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Flutes",
+    "fa": "شیار"
+   },
+   "summary": {
+    "en": "The pattern over corrugated columns.",
+    "fa": "نقش روی ستون‌های شیاردار."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "The star pattern over a row of corrugated columns; each column is shaded like a rounded flute, in terracotta, sand and turquoise.",
+    "fa": "نقش ستاره‌ای روی ردیفی از ستون‌های شیاردار؛ هر ستون مثل یک شیار گرد سایه خورده است، در آجری، ماسه‌ای و فیروزه‌ای."
+   },
+   "palette": {
+    "id": "gel",
+    "name": {
+     "en": "Clay and turquoise",
+     "fa": "گِل و آجر"
+    }
+   },
+   "background": "#160906",
+   "image": {
+    "full": {
+     "file": "/art/img/flutes-clay.webp",
+     "width": 1208,
+     "height": 1367
+    },
+    "small": {
+     "file": "/art/img/flutes-clay-small.webp",
+     "width": 640,
+     "height": 724
+    }
+   }
+  },
+  {
+   "id": "construction-5x5",
+   "order": 12,
+   "series": "construction",
+   "featured": false,
+   "live": false,
+   "year": 2026,
+   "title": {
+    "en": "Construction, five by five",
+    "fa": "ساخت، پنج در پنج"
+   },
+   "summary": {
+    "en": "The line skeleton the colored pieces are built from.",
+    "fa": "اسکلت خطی که اثرهای رنگی روی آن ساخته شده‌اند."
+   },
+   "caption": {
+    "en": "Made with Python.",
+    "fa": "ساخته‌شده با Python."
+   },
+   "alt": {
+    "en": "A black line drawing of the star pattern tiled five by five, without color. It is the skeleton the colored pieces are built on.",
+    "fa": "طرحی خطی و بدون رنگ از نقش ستاره‌ای که پنج در پنج تکرار شده است. اسکلتی که اثرهای رنگی روی آن ساخته شده‌اند."
+   },
+   "palette": null,
+   "background": "#ffffff",
+   "image": {
+    "full": {
+     "file": "/art/img/construction-5x5.webp",
+     "width": 1174,
+     "height": 1600
+    },
+    "small": {
+     "file": "/art/img/construction-5x5-small.webp",
+     "width": 640,
+     "height": 872
+    }
+   }
+  }
+ ]
+}

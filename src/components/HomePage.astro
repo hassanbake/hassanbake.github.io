@@ -5,6 +5,8 @@ import Wordmark from "../components/Wordmark.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
 import NoteRows from "../components/NoteRows.astro";
+import LiveSphere from "../components/LiveSphere.astro";
+import { ART_CREDIT, FEATURED_PIECE, MADE_WITH, artPath } from "../art";
 import {
   STRINGS,
   formatNumber,
@@ -101,6 +103,21 @@ const helloHref = email ? `mailto:${email}` : github;
           </>
         )
       }
+    </div>
+  </section>
+
+  <section class="art-band" id="art" aria-labelledby="art-title">
+    <div class="wrap art-band-in">
+      <div class="art-band-text rv">
+        <p class="eyebrow">{t.artTitle}</p>
+        <h2 id="art-title">{t.artBandTitle}</h2>
+        <p class="art-band-body">{t.artBandBody}</p>
+        <a class="art-more" href={artPath(locale)}>{t.artAll} <span aria-hidden="true">{locale === "fa" ? "←" : "→"}</span></a>
+        <p class="art-credit">{MADE_WITH[locale]} · {ART_CREDIT[locale]}</p>
+      </div>
+      <div class="art-band-visual rv">
+        <LiveSphere locale={locale} piece={FEATURED_PIECE} />
+      </div>
     </div>
   </section>
 

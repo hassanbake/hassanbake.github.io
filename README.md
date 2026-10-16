@@ -61,6 +61,19 @@ URLs: `/notes/<slug>/`, `/fa/notes/<slug>/`, `/authors/<slug>/`, `/fa/authors/<s
 Sitemap: `/sitemap-index.xml`. Old `article.html?slug=...&lang=...` links
 redirect to the new URLs.
 
+## Art
+
+`/art/` and `/fa/art/` show the gallery (live sphere with a palette switcher,
+then the pieces by series); each piece has its own page `/art/<id>/`. The home
+page has a band with the live sphere. Content comes from `src/data/art.json`
+(titles, summaries, alt text and credit in both languages, image sizes), the
+images live in `public/art/img/`, and the live sphere is drawn by
+`src/scripts/sphere-canvas.js` from `public/art/sphere-data.json`. Without
+JavaScript the static image is shown. Every piece carries "Made with Python."
+and the author name only; the source scripts and their commands are not
+published. To add a piece, add the WebP files, then an entry to `art.json`
+(see `/mnt/project-files/art/web/README.md` for the field meanings).
+
 ## Design
 
 "Blend Navy": navy frame, ivory reading surface. Tokens and motion live in
