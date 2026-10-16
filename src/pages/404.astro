@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import GirihBg from "../components/GirihBg.astro";
 import Wordmark from "../components/Wordmark.astro";
 import { STRINGS, localePath } from "../i18n";
 
@@ -10,6 +11,7 @@ const t = STRINGS.en;
   <main class="dark nf">
     <div class="blob b1" aria-hidden="true"></div>
     <div class="blob b2" aria-hidden="true"></div>
+    <GirihBg />
     <div class="nf-in">
       <a href={localePath("en")}><Wordmark /></a>
       <h1>404</h1>
