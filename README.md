@@ -88,8 +88,9 @@ Vazirmatn (OFL). To add IRANYekan, put the licensed `.woff2` files in
 `global.css`; the font stack already prefers it. Do not commit font files
 whose license has not been confirmed.
 
-Contact chips in the "Say hello" band come from `SITE.contact` in `src/config.ts`;
-empty values are hidden.
+The email, GitHub and LinkedIn links in the footer and on the author page come
+from `SITE.contact` in `src/config.ts`; empty values are hidden. The topic line
+under the hero lists the categories of the published notes.
 
 ## Deploy
 
