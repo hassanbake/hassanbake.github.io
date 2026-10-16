@@ -1,6 +1,6 @@
 import { ART_PIECES, ART_SERIES } from "./art";
 import { SITE } from "./config";
-import { STRINGS, formatDate, type Locale } from "./i18n";
+import { STRINGS, formatDate, formatNumber, type Locale } from "./i18n";
 import { getNotes } from "./posts";
 import type { CardInput } from "./og/card";
 
@@ -11,7 +11,13 @@ export async function ogCards(): Promise<Record<string, CardInput>> {
   for (const locale of ["en", "fa"] as const) {
     const t = STRINGS[locale];
     const key = (rest: string) => `${locale === "en" ? "" : "fa/"}${rest}`;
-    cards[key("site")] = { locale, title: t.tagline, eyebrow: t.kicker };
+    cards[key("site")] = {
+      locale,
+      title: t.tagline,
+      eyebrow: t.kicker.split(" · ").slice(0, 2).join(" · "),
+      byline: SITE.author[locale],
+      portrait: "site",
+    };
     for (const note of await getNotes(locale)) {
       cards[key(`notes/${note.slug}`)] = {
         locale,
@@ -19,6 +25,11 @@ export async function ogCards(): Promise<Record<string, CardInput>> {
         eyebrow: note.category,
         byline: note.author,
         detail: formatDate(note.data.date, locale),
+        // Notes by the site's author carry the portrait; a guest author gets the plain card.
+        ...(note.authorSlug === SITE.authorSlug && {
+          portrait: "article" as const,
+          readTime: `${formatNumber(note.readingMinutes, locale)} ${t.minRead}`,
+        }),
       };
     }
     for (const piece of ART_PIECES) {

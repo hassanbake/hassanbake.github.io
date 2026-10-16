@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { PORTRAIT } from "../portrait";
 import GirihBg from "./GirihBg.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
@@ -71,7 +72,12 @@ const arrow = locale === "fa" ? { prev: "→", next: "←" } : { prev: "←", ne
               <dd>{series.title[locale]}</dd>
             </div>
           </dl>
-          <p class="art-credit rise-in" style="--d:400ms">{MADE_WITH[locale]} · {ART_CREDIT[locale]}</p>
+          <p class="art-credit rise-in" style="--d:400ms">{MADE_WITH[locale]} ·
+            <span class="credit-by">
+              <img class="byline-photo" src={PORTRAIT.byline} width="28" height="28" alt="" decoding="async" />
+              {ART_CREDIT[locale]}
+            </span>
+          </p>
           <nav class="piece-nav rise-in" style="--d:480ms" aria-label={t.artTitle}>
             {
               prev ? (

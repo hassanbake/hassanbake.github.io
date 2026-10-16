@@ -1,5 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
+import PortraitHead from "./PortraitHead.astro";
+import PortraitBadge from "./PortraitBadge.astro";
 import GirihBg from "./GirihBg.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
@@ -34,6 +36,7 @@ const switchTo = { locale: other, href: authorPath(other, slug) };
     <div class="blob b1" aria-hidden="true"></div>
     <div class="blob b2" aria-hidden="true"></div>
     <GirihBg />
+    <PortraitHead locale={locale} />
     <div class="wrap a-head-in">
       <SiteNav locale={locale} variant="article" switchTo={switchTo} />
       <div class="a-head-body">
@@ -44,6 +47,7 @@ const switchTo = { locale: other, href: authorPath(other, slug) };
       </div>
     </div>
   </header>
+  <PortraitBadge locale={locale} here />
 
   <main class="sect">
     <div class="wrap">

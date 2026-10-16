@@ -5,6 +5,7 @@ import GirihBg from "./GirihBg.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
+import { PORTRAIT } from "../portrait";
 import { ogPath } from "../og/paths";
 import { STRINGS, authorPath, formatDate, formatNumber, notePath, type Locale } from "../i18n";
 import type { Note } from "../posts";
@@ -65,7 +66,13 @@ if (translation) alternates[translation.locale] = notePath(translation.locale, s
         <h1 class="a-title rise-in" style="--d:120ms">{data.title}</h1>
         <p class="a-stand rise-in" style="--d:240ms">{data.description}</p>
         <p class="byline rise-in" style="--d:360ms">
-          <span class="avatar" aria-hidden="true">{initial}</span>
+          {
+            authorSlug === SITE.authorSlug ? (
+              <img class="byline-photo" src={PORTRAIT.byline} width="34" height="34" alt="" decoding="async" />
+            ) : (
+              <span class="avatar" aria-hidden="true">{initial}</span>
+            )
+          }
           {authorHref ? <a class="byline-name" href={authorHref}>{author}</a> : <span>{author}</span>}
         </p>
         {

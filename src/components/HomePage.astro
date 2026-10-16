@@ -4,6 +4,7 @@ import SiteNav from "../components/SiteNav.astro";
 import Wordmark from "../components/Wordmark.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../config";
+import { PORTRAIT } from "../portrait";
 import NoteRows from "../components/NoteRows.astro";
 import LiveSphere from "../components/LiveSphere.astro";
 import { GIRIH_LINES } from "../girih";
@@ -43,12 +44,30 @@ const categories = [...new Set(notes.map((n) => n.category))];
       <canvas class="hero-girih" data-girih></canvas>
       <script type="application/json" id="girih-lines" set:html={JSON.stringify(GIRIH_LINES)} />
     </div>
+    <div class="hero-photo">
+      <img
+        src={PORTRAIT.hero}
+        width="700"
+        height="700"
+        alt={SITE.author[locale]}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+    <div class="hero-photo-fade" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap hero-in">
       <SiteNav locale={locale} variant="home" switchTo={{ locale: other, href: localePath(other) }} />
       <main class="hero-main">
-        <Wordmark big heading />
-        <p class="tagline rise-in" style="--d:900ms">{t.tagline}</p>
-        <p class="descriptor rise-in" style="--d:1000ms">{t.descriptor}</p>
+        <div class="hero-top">
+          <p class="tagline rise-in" style="--d:900ms">{t.tagline}</p>
+          <p class="descriptor rise-in" style="--d:1000ms">{t.descriptor}</p>
+        </div>
+        <div class="hero-bottom">
+          <p class="hero-name rise-in" style="--d:1100ms">{SITE.author[locale]}</p>
+          <Wordmark big heading />
+        </div>
       </main>
     </div>
   </section>

@@ -1,5 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
+import { PORTRAIT } from "../portrait";
+import PortraitBadge from "./PortraitBadge.astro";
 import GirihBg from "./GirihBg.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
@@ -34,7 +36,12 @@ const switchTo = { locale: other, href: artPath(other) };
         <div class="art-hero-text">
           <h1 class="a-title rise-in" style="--d:0ms">{t.artTitle}</h1>
           <p class="a-stand rise-in" style="--d:120ms">{t.artLead}</p>
-          <p class="art-credit rise-in" style="--d:240ms">{MADE_WITH[locale]} · {ART_CREDIT[locale]}</p>
+          <p class="art-credit rise-in" style="--d:240ms">{MADE_WITH[locale]} ·
+            <span class="credit-by">
+              <img class="byline-photo" src={PORTRAIT.byline} width="28" height="28" alt="" decoding="async" />
+              {ART_CREDIT[locale]}
+            </span>
+          </p>
         </div>
         <div class="art-hero-visual rise-in" style="--d:200ms">
           <LiveSphere locale={locale} piece={FEATURED_PIECE} controls />
@@ -42,6 +49,7 @@ const switchTo = { locale: other, href: artPath(other) };
       </div>
     </div>
   </header>
+  <PortraitBadge locale={locale} />
 
   <main class="sect art-index">
     <div class="wrap">
