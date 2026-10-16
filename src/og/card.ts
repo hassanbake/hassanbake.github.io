@@ -97,7 +97,7 @@ export async function renderCard(input: CardInput): Promise<Buffer> {
 
   const mark = h("div", { fontFamily: "Bricolage", fontWeight: 800, fontSize: 40, letterSpacing: -1.2, direction: "ltr" }, [
     h("div", { color: TX }, "hassan"),
-    h("div", { color: AC }, "bake"),
+    h("div", { color: AC }, "Bake"),
   ]);
 
   const textCol = h(
